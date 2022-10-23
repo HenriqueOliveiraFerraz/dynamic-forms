@@ -98,13 +98,19 @@ export class User implements IUser {
           order: 6,
         }
       ),
-      new AutocompleteForm('stateName', this.stateName, State.getStates(), {
-        validators: [Validators.required],
-        label: 'Choose your state',
-        error: 'State is required',
-        required: true,
-        order: 7,
-      }),
+      new AutocompleteForm(
+        'stateName',
+        this.stateName,
+        State.getStates(),
+        'Population: ',
+        {
+          validators: [Validators.required],
+          label: 'Choose your state',
+          error: 'State is required',
+          required: true,
+          order: 7,
+        }
+      ),
     ];
   }
 }

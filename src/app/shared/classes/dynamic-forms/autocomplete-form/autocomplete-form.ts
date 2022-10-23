@@ -8,24 +8,27 @@ export class AutocompleteForm<
   ObjectKey extends {
     [Properties in keyof ObjectKey]: ObjectKey[Properties];
   }
-> extends BaseForm<string | number | null, ObjectKey> {
+> extends BaseForm<string | null, ObjectKey> {
   constructor(
     key: keyof ObjectKey,
-    value: string | number | null,
+    value: string | null,
     autocompleteOptions: IAutocompleteOptions[],
+    smallElementLabel: string,
     baseFormOptions: IBaseFormOptions = {}
   ) {
     super(key, value, baseFormOptions);
-    this.formControl = new FormControl<string | number | null>(value, {
+    this.formControl = new FormControl<string | null>(value, {
       nonNullable: baseFormOptions.nonNullable,
       validators: baseFormOptions.validators,
       asyncValidators: baseFormOptions.asyncValidators,
       updateOn: baseFormOptions.updateOn,
     });
     this.autocompleteOptions = autocompleteOptions;
+    this.smallElementLabel = smallElementLabel;
   }
 
-  formControl: FormControl<string | number | null>;
+  formControl: FormControl<string | null>;
   autocompleteOptions: IAutocompleteOptions[];
+  smallElementLabel: string;
   override controlType: 'autocomplete' = 'autocomplete';
 }
