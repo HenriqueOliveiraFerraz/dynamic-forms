@@ -21,6 +21,8 @@ export class User implements IUser {
     this.mobilePhone = mobilePhone;
     this.authorizedUseOfData = authorizedUseOfData;
     this.pokemonGroupName = pokemonGroupName;
+
+    this.generateDynamicForms();
   }
 
   userName: string;
@@ -29,6 +31,10 @@ export class User implements IUser {
   mobilePhone: string;
   authorizedUseOfData: boolean;
   pokemonGroupName: string;
+
+  getDynamicForms() {
+    return this.dynamicForms;
+  }
 
   private dynamicForms: (
     | TextForm<UserRegistrationFormControls>

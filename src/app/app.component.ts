@@ -16,5 +16,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = new User('', '', '', '', false, '');
+    console.log(this.user.getDynamicForms());
   }
 }

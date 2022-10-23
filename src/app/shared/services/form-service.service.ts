@@ -1,4 +1,3 @@
-import { BooleanInput } from '@angular/cdk/coercion';
 import { Injectable, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BooleanForm } from '../classes/dynamic-forms/boolean-form/boolean-form';
