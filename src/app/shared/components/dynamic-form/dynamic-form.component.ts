@@ -42,6 +42,10 @@ export class DynamicFormComponent<
   selectGroupOptions?: SelectGroupForm<FormType>;
 
   ngOnInit(): void {
+    this.configureInitialState();
+  }
+
+  configureInitialState(): void {
     if (this.dynamicForm instanceof SelectGroupForm<FormType>) {
       this.selectGroupOptions = this.dynamicForm;
     }

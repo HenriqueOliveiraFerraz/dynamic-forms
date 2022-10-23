@@ -27,7 +27,6 @@
     "@angular/router": "^14.2.0",
     "@microsoft/applicationinsights-web": "^2.7.2",
     "@wizsolucoes/ng-application-insights": "^1.1.2",
-    "@wizsolucoes/ng-syz": "^13.0.1",
     "@wizsolucoes/ngx-wiz-sso": "^2.1.5",
     "@wizsolucoes/wiz-alerts": "^2.2.0",
     "@wizsolucoes/wiz-loader": "^2.1.0",
