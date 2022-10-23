@@ -1,10 +1,12 @@
 import { Validators } from '@angular/forms';
 import { IUser } from '../../interfaces/user/i-user';
 import { UserRegistrationFormControls } from '../../types/user-forms/user-registration-form-controls';
+import { AutocompleteForm } from '../dynamic-forms/autocomplete-form/autocomplete-form';
 import { BooleanForm } from '../dynamic-forms/boolean-form/boolean-form';
 import { SelectGroupForm } from '../dynamic-forms/select-group-form/select-group-form';
 import { TextForm } from '../dynamic-forms/text-form/text-form';
 import { PokemonGroup } from '../pokemon/pokemon-group';
+import { State } from '../state/state';
 
 export class User implements IUser {
   constructor(
@@ -13,7 +15,8 @@ export class User implements IUser {
     password: string,
     mobilePhone: string,
     authorizedUseOfData: boolean,
-    pokemonGroupName: string
+    pokemonGroupName: string,
+    stateName: string
   ) {
     this.userName = userName;
     this.emailAddress = emailAddress;
@@ -21,6 +24,7 @@ export class User implements IUser {
     this.mobilePhone = mobilePhone;
     this.authorizedUseOfData = authorizedUseOfData;
     this.pokemonGroupName = pokemonGroupName;
+    this.stateName = stateName;
 
     this.generateDynamicForms();
   }
@@ -31,6 +35,7 @@ export class User implements IUser {
   mobilePhone: string;
   authorizedUseOfData: boolean;
   pokemonGroupName: string;
+  stateName: string;
 
   getDynamicForms() {
     return this.dynamicForms;
@@ -40,6 +45,7 @@ export class User implements IUser {
     | TextForm<UserRegistrationFormControls>
     | BooleanForm<UserRegistrationFormControls>
     | SelectGroupForm<UserRegistrationFormControls>
+    | AutocompleteForm<UserRegistrationFormControls>
   )[] = [];
 
   private generateDynamicForms(): void {
@@ -92,6 +98,13 @@ export class User implements IUser {
           order: 6,
         }
       ),
+      new AutocompleteForm('stateName', this.stateName, State.getStates(), {
+        validators: [Validators.required],
+        label: 'Choose your state',
+        error: 'State is required',
+        required: true,
+        order: 7,
+      }),
     ];
   }
 }

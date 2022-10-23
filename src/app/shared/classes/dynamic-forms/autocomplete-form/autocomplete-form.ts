@@ -1,4 +1,5 @@
 import { FormControl } from '@angular/forms';
+import { IAutocompleteOptions } from 'src/app/shared/interfaces/base-form/i-autocomplete-options';
 import { IBaseFormOptions } from 'src/app/shared/interfaces/base-form/i-base-form-options';
 import { IOptions } from 'src/app/shared/interfaces/base-form/i-options';
 import { BaseForm } from '../base-form/base-form';
@@ -11,7 +12,7 @@ export class AutocompleteForm<
   constructor(
     key: keyof ObjectKey,
     value: string | number | null,
-    options: IOptions[],
+    autocompleteOptions: IAutocompleteOptions[],
     baseFormOptions: IBaseFormOptions = {}
   ) {
     super(key, value, baseFormOptions);
@@ -21,10 +22,10 @@ export class AutocompleteForm<
       asyncValidators: baseFormOptions.asyncValidators,
       updateOn: baseFormOptions.updateOn,
     });
-    this.options = options;
+    this.autocompleteOptions = autocompleteOptions;
   }
 
   formControl: FormControl<string | number | null>;
-  options: IOptions[];
+  autocompleteOptions: IAutocompleteOptions[];
   override controlType: 'autocomplete' = 'autocomplete';
 }

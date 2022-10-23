@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   constructor(private formService: FormService) {}
 
   ngOnInit(): void {
-    this.user = new User('', '', '', '', false, '');
+    this.user = new User('', '', '', '', false, '', '');
     this.userFormGroup = this.formService.toFormGroup(
       this.user.getDynamicForms()
     );

@@ -10,5 +10,6 @@ export type UserRegistrationFormControls = ToFormControl<
     | 'mobilePhone'
     | 'authorizedUseOfData'
     | 'pokemonGroupName'
+    | 'stateName'
   >
 >;
