@@ -1,5 +1,6 @@
 import { ValidatorFn, AsyncValidatorFn } from '@angular/forms';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
+import { IOptions } from './i-options';
 
 export interface IBaseFormOptions {
   formControlName?: string | number;
@@ -19,5 +20,5 @@ export interface IBaseFormOptions {
   order?: number;
   controlType?: string;
   type?: string;
-  options?: { key: string; value: string }[];
+  options?: IOptions[];
 }

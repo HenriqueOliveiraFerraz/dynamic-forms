@@ -2,6 +2,7 @@ import { ValidatorFn, AsyncValidatorFn } from '@angular/forms';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { IBaseForm } from '../../interfaces/base-form/i-base-form';
 import { IBaseFormOptions } from '../../interfaces/base-form/i-base-form-options';
+import { IOptions } from '../../interfaces/base-form/i-options';
 
 export class BaseForm<ValueType, ObjectKey extends {}>
   implements IBaseForm<ValueType, ObjectKey>, IBaseFormOptions
@@ -25,7 +26,7 @@ export class BaseForm<ValueType, ObjectKey extends {}>
   order: number;
   controlType: string;
   type: string;
-  options: { key: string; value: string }[];
+  options: IOptions[];
 
   constructor(
     key: string | keyof ObjectKey,
