@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { User } from './shared/classes/user/user';
+import { FormService } from './shared/services/form.service';
 import { UserRegistrationFormControls } from './shared/types/user-forms/user-registration-form-controls';
 
 @Component({
@@ -12,10 +13,12 @@ export class AppComponent implements OnInit {
   user!: User;
   userFormGroup!: FormGroup<UserRegistrationFormControls>;
 
-  constructor() {}
+  constructor(private formService: FormService) {}
 
   ngOnInit(): void {
     this.user = new User('', '', '', '', false, '');
-    console.log(this.user.getDynamicForms());
+    this.userFormGroup = this.formService.toFormGroup(
+      this.user.getDynamicForms()
+    );
   }
 }

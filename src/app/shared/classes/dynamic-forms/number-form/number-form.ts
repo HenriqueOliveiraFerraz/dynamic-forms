@@ -1,5 +1,5 @@
 import { FormControl } from '@angular/forms';
-import { IBaseFormOptions } from '../../interfaces/base-form/i-base-form-options';
+import { IBaseFormOptions } from 'src/app/shared/interfaces/base-form/i-base-form-options';
 import { BaseForm } from '../base-form/base-form';
 
 export class NumberForm<

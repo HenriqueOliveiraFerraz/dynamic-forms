@@ -1,0 +1,5 @@
+<form [formGroup]="userFormGroup">
+  <div *ngFor="let form of user.getDynamicForms()">
+    <app-dynamic-form [dynamicForm]="form"> </app-dynamic-form>
+  </div>
+</form>

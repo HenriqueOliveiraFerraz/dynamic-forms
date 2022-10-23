@@ -13,6 +13,7 @@ import {
   RecaptchaSettings,
 } from 'ng-recaptcha';
 import { environment } from 'src/environments/environment';
+import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
 
 const globalSettings: RecaptchaSettings = {
   siteKey: environment.reCaptcha.siteKey,
@@ -28,6 +29,7 @@ const globalSettings: RecaptchaSettings = {
     MatButtonModule,
     ReactiveFormsModule,
     RecaptchaModule,
+    DynamicFormComponent,
   ],
   exports: [
     CommonModule,
@@ -38,6 +40,7 @@ const globalSettings: RecaptchaSettings = {
     MatButtonModule,
     ReactiveFormsModule,
     RecaptchaModule,
+    DynamicFormComponent,
   ],
   providers: [
     {
