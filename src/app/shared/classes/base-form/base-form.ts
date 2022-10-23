@@ -26,7 +26,6 @@ export class BaseForm<ValueType, ObjectKey extends {}>
   order: number;
   controlType: string;
   type: string;
-  options: IOptions[];
 
   constructor(
     key: string | keyof ObjectKey,
@@ -52,6 +51,5 @@ export class BaseForm<ValueType, ObjectKey extends {}>
     this.order = options.order === undefined ? 1 : options.order;
     this.controlType = options.controlType || '';
     this.type = options.type || '';
-    this.options = options.options || [];
   }
 }
