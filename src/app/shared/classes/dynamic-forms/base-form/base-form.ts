@@ -1,8 +1,7 @@
 import { ValidatorFn, AsyncValidatorFn } from '@angular/forms';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
-import { IBaseForm } from '../../interfaces/base-form/i-base-form';
-import { IBaseFormOptions } from '../../interfaces/base-form/i-base-form-options';
-import { IOptions } from '../../interfaces/base-form/i-options';
+import { IBaseForm } from '../../../interfaces/base-form/i-base-form';
+import { IBaseFormOptions } from '../../../interfaces/base-form/i-base-form-options';
 
 export class BaseForm<ValueType, ObjectKey extends {}>
   implements IBaseForm<ValueType, ObjectKey>, IBaseFormOptions

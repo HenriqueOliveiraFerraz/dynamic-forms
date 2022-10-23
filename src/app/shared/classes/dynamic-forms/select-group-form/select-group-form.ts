@@ -1,6 +1,6 @@
 import { FormControl } from '@angular/forms';
-import { IBaseFormOptions } from '../../interfaces/base-form/i-base-form-options';
-import { IGroupOptions } from '../../interfaces/base-form/i-group-options';
+import { IBaseFormOptions } from 'src/app/shared/interfaces/base-form/i-base-form-options';
+import { IGroupOptions } from 'src/app/shared/interfaces/base-form/i-group-options';
 import { BaseForm } from '../base-form/base-form';
 
 export class SelectGroupForm<
