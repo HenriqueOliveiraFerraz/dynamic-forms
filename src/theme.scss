@@ -15,7 +15,7 @@ $wiz-typography: mat-typography-config(
 
 // Typography Colors
 $wl-dark-text: #333;
-$wl-light-text: #FFFFFF;
+$wl-light-text: #ffffff;
 
 // Primary Color Palette
 $wl-primary: (
@@ -28,7 +28,7 @@ $wl-primary: (
     lighter: $wl-light-text,
     darker: $wl-light-text,
     200: $wl-light-text,
-  )
+  ),
 );
 
 // Secondary Color Palette
@@ -42,26 +42,26 @@ $wl-accent: (
     lighter: $wl-light-text,
     darker: $wl-light-text,
     200: $wl-light-text,
-  )
+  ),
 );
 
 $wl-warn: (
-  main: #FF3535,
-  lighter: #FFC2C2,
-  darker: #FF2222,
-  200: #FF3535,
+  main: #ff3535,
+  lighter: #ffc2c2,
+  darker: #ff2222,
+  200: #ff3535,
   contrast: (
     main: $wl-light-text,
     lighter: $wl-dark-text,
     darker: $wl-light-text,
-  )
+  ),
 );
 
 // Alert Color Palette
-$alert-success: #00BF85;
-$alert-warning: #FFC136;
-$alert-information: #2175D6;
-$alert-error: #FF3535;
+$alert-success: #00bf85;
+$alert-warning: #ffc136;
+$alert-information: #2175d6;
+$alert-error: #ff3535;
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
@@ -80,19 +80,14 @@ $theming-material-components-accent: mat-palette(
 );
 
 // The warn palette is optional (defaults to red).
-$theming-material-components-warn: mat-palette(
-  $wl-warn,
-  main,
-  lighter,
-  darker
-);
+$theming-material-components-warn: mat-palette($wl-warn, main, lighter, darker);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
 $theming-material-components-theme: mat-light-theme(
   $theming-material-components-primary,
   $theming-material-components-accent,
-  $theming-material-components-warn,
+  $theming-material-components-warn
 );
 
 // Include theme styles for core and each component used in your app.
