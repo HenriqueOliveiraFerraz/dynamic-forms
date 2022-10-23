@@ -29,26 +29,32 @@ export class BaseForm<ValueType, ObjectKey extends {}>
   constructor(
     key: string | keyof ObjectKey,
     value: ValueType | null,
-    options: IBaseFormOptions = {}
+    baseFormOptions: IBaseFormOptions = {}
   ) {
     this.key = key;
     this.value = value;
     this.formControlName = key as string | number;
-    this.matFormFieldAppearance = options.matFormFieldAppearance ?? 'outline';
-    this.nonNullable = options.nonNullable ?? true;
-    this.updateOn = options.updateOn ?? 'change';
-    this.validators = options.validators ?? null;
-    this.asyncValidators = options.asyncValidators ?? null;
-    this.error = options.error || '';
-    this.placeholder = options.placeholder || '';
-    this.label = options.label || '';
-    this.hint = options.hint || '';
-    this.icon = options.icon ?? { name: '', suffix: false, prefix: false };
-    this.prefix = options.prefix || '';
-    this.suffix = options.suffix || '';
-    this.required = !!options.required;
-    this.order = options.order === undefined ? 1 : options.order;
-    this.controlType = options.controlType || '';
-    this.type = options.type || '';
+    this.matFormFieldAppearance =
+      baseFormOptions.matFormFieldAppearance ?? 'outline';
+    this.nonNullable = baseFormOptions.nonNullable ?? true;
+    this.updateOn = baseFormOptions.updateOn ?? 'change';
+    this.validators = baseFormOptions.validators ?? null;
+    this.asyncValidators = baseFormOptions.asyncValidators ?? null;
+    this.error = baseFormOptions.error || '';
+    this.placeholder = baseFormOptions.placeholder || '';
+    this.label = baseFormOptions.label || '';
+    this.hint = baseFormOptions.hint || '';
+    this.icon = baseFormOptions.icon ?? {
+      name: '',
+      suffix: false,
+      prefix: false,
+    };
+    this.prefix = baseFormOptions.prefix || '';
+    this.suffix = baseFormOptions.suffix || '';
+    this.required = !!baseFormOptions.required;
+    this.order =
+      baseFormOptions.order === undefined ? 1 : baseFormOptions.order;
+    this.controlType = baseFormOptions.controlType || '';
+    this.type = baseFormOptions.type || '';
   }
 }

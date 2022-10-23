@@ -13,18 +13,19 @@ export class SelectGroupForm<
     value: string | number | null,
     groupOptions: IGroupOptions[],
     emptyOptionsLabel: string,
-    options: IBaseFormOptions = {}
+    baseFormOptions: IBaseFormOptions = {}
   ) {
-    super(key, value, options);
+    super(key, value, baseFormOptions);
     this.formControl = new FormControl<string | number | null>(value, {
-      nonNullable: options.nonNullable,
-      validators: options.validators,
-      asyncValidators: options.asyncValidators,
-      updateOn: options.updateOn,
+      nonNullable: baseFormOptions.nonNullable,
+      validators: baseFormOptions.validators,
+      asyncValidators: baseFormOptions.asyncValidators,
+      updateOn: baseFormOptions.updateOn,
     });
     this.groupOptions = groupOptions;
     this.emptyOptionsLabel = emptyOptionsLabel;
   }
+
   emptyOptionsLabel: string;
   formControl: FormControl<string | number | null>;
   groupOptions: IGroupOptions[];

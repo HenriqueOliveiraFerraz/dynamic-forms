@@ -10,14 +10,14 @@ export class TextForm<
   constructor(
     key: keyof ObjectKey,
     value: string | null,
-    options: IBaseFormOptions = {}
+    baseFormOptions: IBaseFormOptions = {}
   ) {
-    super(key, value, options);
+    super(key, value, baseFormOptions);
     this.formControl = new FormControl<string | null>(value, {
-      nonNullable: options.nonNullable,
-      validators: options.validators,
-      asyncValidators: options.asyncValidators,
-      updateOn: options.updateOn,
+      nonNullable: baseFormOptions.nonNullable,
+      validators: baseFormOptions.validators,
+      asyncValidators: baseFormOptions.asyncValidators,
+      updateOn: baseFormOptions.updateOn,
     });
   }
   formControl: FormControl<string | null>;
