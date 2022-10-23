@@ -12,6 +12,7 @@ export class SelectGroupForm<
     key: keyof ObjectKey,
     value: string | number | null,
     groupOptions: IGroupOptions[],
+    emptyOptionsLabel: string,
     options: IBaseFormOptions = {}
   ) {
     super(key, value, options);
@@ -22,7 +23,9 @@ export class SelectGroupForm<
       updateOn: options.updateOn,
     });
     this.groupOptions = groupOptions;
+    this.emptyOptionsLabel = emptyOptionsLabel;
   }
+  emptyOptionsLabel: string;
   formControl: FormControl<string | number | null>;
   groupOptions: IGroupOptions[];
   override controlType: 'selectGroup' = 'selectGroup';

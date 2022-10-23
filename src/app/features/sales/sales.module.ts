@@ -6,7 +6,6 @@ import { SalesComponent } from './sales.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { NgSyzCpfSearchModule } from '@wizsolucoes/ng-syz';
 
 @NgModule({
   declarations: [SalesComponent],
@@ -17,7 +16,6 @@ import { NgSyzCpfSearchModule } from '@wizsolucoes/ng-syz';
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule,
-    NgSyzCpfSearchModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

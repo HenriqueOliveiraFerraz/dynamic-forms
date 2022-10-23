@@ -83,6 +83,7 @@ export class User implements IUser {
         'pokemonGroupName',
         this.pokemonGroupName,
         PokemonGroup.getPokemons(),
+        '-- None --',
         {
           validators: [Validators.required],
           label: 'Choose your pokemon group',
