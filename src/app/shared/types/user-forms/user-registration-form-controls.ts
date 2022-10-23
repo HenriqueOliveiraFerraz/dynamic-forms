@@ -9,6 +9,15 @@ export type UserRegistrationFormControls = ToFormControl<
     | 'password'
     | 'mobilePhone'
     | 'authorizedUseOfData'
-    | 'pokemonGroups'
+    | 'pokemonGroup'
   >
 >;
+
+// let teste: UserRegistrationFormControls = {
+//   userName: new FormControl<string>('', { nonNullable: true }),
+//   emailAddress: new FormControl<string>('', { nonNullable: true }),
+//   password: new FormControl<string>('', { nonNullable: true }),
+//   mobilePhone: new FormControl<string>('', { nonNullable: true }),
+//   authorizedUseOfData: new FormControl<boolean>(false, { nonNullable: true }),
+//   pokemonGroup: new FormControl<PokemonGroup | null>(null),
+// };

@@ -8,14 +8,14 @@ export class User implements IUser {
     password: string,
     mobilePhone: string,
     authorizedUseOfData: boolean,
-    pokemonGroups: PokemonGroup[]
+    pokemonGroup: PokemonGroup | null
   ) {
     this.userName = userName;
     this.emailAddress = emailAddress;
     this.password = password;
     this.mobilePhone = mobilePhone;
     this.authorizedUseOfData = authorizedUseOfData;
-    this.pokemonGroups = pokemonGroups;
+    this.pokemonGroup = pokemonGroup;
   }
 
   userName: string;
@@ -23,5 +23,5 @@ export class User implements IUser {
   password: string;
   mobilePhone: string;
   authorizedUseOfData: boolean;
-  pokemonGroups: PokemonGroup[];
+  pokemonGroup: PokemonGroup | null;
 }

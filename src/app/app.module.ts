@@ -21,16 +21,7 @@ registerLocaleData(localePt, 'pt-BR');
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    AppRoutingModule,
-    CoreModule,
-    SharedModule,
-    NgApplicationInsightsModule.forRoot({
-      enabled: true,
-      instrumentationKey: '',
-      properties: {},
-    }),
-  ],
+  imports: [AppRoutingModule, CoreModule, SharedModule],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt-BR' },
     { provide: HTTP_INTERCEPTORS, useClass: TenantInterceptor, multi: true },
