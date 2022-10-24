@@ -37,7 +37,12 @@ export class User implements IUser {
   pokemonGroupName: string;
   stateName: string;
 
-  getDynamicForms() {
+  getDynamicForms(): (
+    | TextForm<UserRegistrationFormControls>
+    | BooleanForm<UserRegistrationFormControls>
+    | SelectGroupForm<UserRegistrationFormControls>
+    | AutocompleteForm<UserRegistrationFormControls>
+  )[] {
     return this.dynamicForms;
   }
 

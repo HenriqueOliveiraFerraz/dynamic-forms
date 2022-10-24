@@ -1,7 +1,12 @@
 <div [ngSwitch]="dynamicForm.controlType">
   <div *ngSwitchCase="'text'">
-    <mat-form-field [appearance]="dynamicForm.matFormFieldAppearance">
-      <mat-label *ngIf="dynamicForm.label">{{ dynamicForm.label }}</mat-label>
+    <mat-form-field
+      [id]="dynamicForm.key"
+      [appearance]="dynamicForm.matFormFieldAppearance"
+    >
+      <mat-label [attr.for]="dynamicForm.key" *ngIf="dynamicForm.label">{{
+        dynamicForm.label
+      }}</mat-label>
       <input
         matInput
         [placeholder]="dynamicForm.placeholder"
@@ -14,12 +19,17 @@
     </mat-form-field>
   </div>
   <div *ngSwitchCase="'boolean'">
-    <mat-checkbox [formControl]="dynamicForm.formControl">{{
-      dynamicForm.label
-    }}</mat-checkbox>
+    <mat-checkbox
+      [id]="dynamicForm.key.toString()"
+      [formControl]="dynamicForm.formControl"
+      >{{ dynamicForm.label }}</mat-checkbox
+    >
   </div>
   <div *ngSwitchCase="'selectGroup'">
-    <mat-form-field [appearance]="selectGroupForm!.matFormFieldAppearance">
+    <mat-form-field
+      [id]="selectGroupForm!.key"
+      [appearance]="selectGroupForm!.matFormFieldAppearance"
+    >
       <mat-label>{{ selectGroupForm!.label }}</mat-label>
       <mat-select
         [formControl]="selectGroupForm!.formControl"
@@ -39,7 +49,10 @@
     </mat-form-field>
   </div>
   <div *ngSwitchCase="'autocomplete'">
-    <mat-form-field [appearance]="autocompleteForm!.matFormFieldAppearance">
+    <mat-form-field
+      [id]="autocompleteForm!.key"
+      [appearance]="autocompleteForm!.matFormFieldAppearance"
+    >
       <mat-label>{{ autocompleteForm!.label }}</mat-label>
       <input
         matInput
@@ -51,7 +64,13 @@
           *ngFor="let autocomplete of filteredAutocompleteOptions | async"
           [value]="autocomplete.value"
         >
-          <img aria-hidden [src]="autocomplete.flag" height="25" />
+          <img
+            aria-hidden
+            [src]="autocomplete.img?.src"
+            [alt]="autocomplete.img?.alt"
+            [width]="autocomplete.img?.width"
+            [height]="autocomplete.img?.height"
+          />
           <span>{{ autocomplete.value }}</span> |
           <small
             >{{ autocompleteForm!.smallElementLabel

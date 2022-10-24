@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, FormControl } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -34,19 +34,25 @@ import { IAutocompleteOptions } from '../../interfaces/base-form/i-autocomplete-
   styleUrls: ['./dynamic-form.component.scss'],
 })
 export class DynamicFormComponent<
+  ControlsType extends {
+    [Properties in keyof ControlsType]:
+      | FormControl<string | null>
+      | FormControl<boolean | null>
+      | FormControl<number | null>;
+  },
   FormType extends
-    | TextForm<FormType>
-    | BooleanForm<FormType>
-    | NumberForm<FormType>
-    | SelectGroupForm<FormType>
-    | AutocompleteForm<FormType>
+    | TextForm<ControlsType>
+    | BooleanForm<ControlsType>
+    | NumberForm<ControlsType>
+    | SelectGroupForm<ControlsType>
+    | AutocompleteForm<ControlsType>
 > implements OnInit
 {
   @Input()
   dynamicForm!: FormType;
 
-  selectGroupForm?: SelectGroupForm<FormType>;
-  autocompleteForm?: AutocompleteForm<FormType>;
+  selectGroupForm?: SelectGroupForm<ControlsType>;
+  autocompleteForm?: AutocompleteForm<ControlsType>;
   filteredAutocompleteOptions?: Observable<IAutocompleteOptions[]>;
 
   ngOnInit(): void {
@@ -54,20 +60,32 @@ export class DynamicFormComponent<
   }
 
   configureInitialState(): void {
-    if (this.dynamicForm instanceof SelectGroupForm<FormType>) {
-      this.selectGroupForm = this.dynamicForm;
-    } else if (this.dynamicForm instanceof AutocompleteForm<FormType>) {
-      this.autocompleteForm = this.dynamicForm;
-      this.filteredAutocompleteOptions =
-        this.autocompleteForm.formControl.valueChanges.pipe(
-          startWith(''),
-          map((auto) =>
-            auto
-              ? this.filterAuto(auto)
-              : this.autocompleteForm!.autocompleteOptions.slice()
-          )
-        );
+    if (this.dynamicForm instanceof SelectGroupForm<ControlsType>) {
+      this.configureSelectGroup(
+        this.dynamicForm as SelectGroupForm<ControlsType>
+      );
+    } else if (this.dynamicForm instanceof AutocompleteForm<ControlsType>) {
+      this.configureAutocomplete(
+        this.dynamicForm as AutocompleteForm<ControlsType>
+      );
     }
+  }
+
+  configureSelectGroup(selectGroup: SelectGroupForm<ControlsType>): void {
+    this.selectGroupForm = selectGroup;
+  }
+
+  configureAutocomplete(auto: AutocompleteForm<ControlsType>): void {
+    this.autocompleteForm = auto;
+    this.filteredAutocompleteOptions =
+      this.autocompleteForm.formControl.valueChanges.pipe(
+        startWith(''),
+        map((autoValue) =>
+          autoValue
+            ? this.filterAuto(autoValue)
+            : this.autocompleteForm!.autocompleteOptions.slice()
+        )
+      );
   }
 
   filterAuto(value: string): IAutocompleteOptions[] {
