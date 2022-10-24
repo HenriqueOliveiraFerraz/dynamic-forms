@@ -3,9 +3,11 @@ import { IUser } from '../../interfaces/user/i-user';
 import { UserRegistrationFormControls } from '../../types/user-forms/user-registration-form-controls';
 import { AutocompleteForm } from '../dynamic-forms/autocomplete-form/autocomplete-form';
 import { BooleanForm } from '../dynamic-forms/boolean-form/boolean-form';
+import { RadioGroupForm } from '../dynamic-forms/radio-group-form/radio-group-form';
 import { SelectGroupForm } from '../dynamic-forms/select-group-form/select-group-form';
 import { TextForm } from '../dynamic-forms/text-form/text-form';
 import { PokemonGroup } from '../pokemon/pokemon-group';
+import { Season } from '../season/season';
 import { State } from '../state/state';
 
 export class User implements IUser {
@@ -16,7 +18,8 @@ export class User implements IUser {
     mobilePhone: string,
     authorizedUseOfData: boolean,
     pokemonGroupName: string,
-    stateName: string
+    stateName: string,
+    favoriteSeason: string
   ) {
     this.userName = userName;
     this.emailAddress = emailAddress;
@@ -25,6 +28,7 @@ export class User implements IUser {
     this.authorizedUseOfData = authorizedUseOfData;
     this.pokemonGroupName = pokemonGroupName;
     this.stateName = stateName;
+    this.favoriteSeason = favoriteSeason;
 
     this.generateDynamicForms();
   }
@@ -36,12 +40,14 @@ export class User implements IUser {
   authorizedUseOfData: boolean;
   pokemonGroupName: string;
   stateName: string;
+  favoriteSeason: string;
 
   getDynamicForms(): (
     | TextForm<UserRegistrationFormControls>
     | BooleanForm<UserRegistrationFormControls>
     | SelectGroupForm<UserRegistrationFormControls>
     | AutocompleteForm<UserRegistrationFormControls>
+    | RadioGroupForm<UserRegistrationFormControls>
   )[] {
     return this.dynamicForms;
   }
@@ -51,6 +57,7 @@ export class User implements IUser {
     | BooleanForm<UserRegistrationFormControls>
     | SelectGroupForm<UserRegistrationFormControls>
     | AutocompleteForm<UserRegistrationFormControls>
+    | RadioGroupForm<UserRegistrationFormControls>
   )[] = [];
 
   private generateDynamicForms(): void {
@@ -114,6 +121,18 @@ export class User implements IUser {
           error: 'State is required',
           required: true,
           order: 7,
+        }
+      ),
+      new RadioGroupForm(
+        'favoriteSeason',
+        this.favoriteSeason,
+        Season.getSeasons(),
+        {
+          validators: [Validators.required],
+          label: 'Choose your state',
+          error: 'State is required',
+          required: true,
+          order: 8,
         }
       ),
     ];

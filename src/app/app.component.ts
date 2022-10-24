@@ -11,6 +11,7 @@ import {
 import { FormGroup } from '@angular/forms';
 import { AutocompleteForm } from './shared/classes/dynamic-forms/autocomplete-form/autocomplete-form';
 import { BooleanForm } from './shared/classes/dynamic-forms/boolean-form/boolean-form';
+import { RadioGroupForm } from './shared/classes/dynamic-forms/radio-group-form/radio-group-form';
 import { SelectGroupForm } from './shared/classes/dynamic-forms/select-group-form/select-group-form';
 import { TextForm } from './shared/classes/dynamic-forms/text-form/text-form';
 import { User } from './shared/classes/user/user';
@@ -35,6 +36,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       | BooleanForm<UserRegistrationFormControls>
       | SelectGroupForm<UserRegistrationFormControls>
       | AutocompleteForm<UserRegistrationFormControls>
+      | RadioGroupForm<UserRegistrationFormControls>
     >
   >;
   @ViewChild('dynamicFormComponentTop')
@@ -45,7 +47,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   constructor(private formService: FormService) {}
 
   ngOnInit(): void {
-    this.user = new User('', '', '', '', false, '', '');
+    this.user = new User('', '', '', '', false, '', '', '');
     this.userFormGroup = this.formService.toFormGroup(
       this.user.getDynamicForms()
     );

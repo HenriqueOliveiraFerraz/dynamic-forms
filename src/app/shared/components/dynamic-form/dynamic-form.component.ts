@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { BooleanForm } from '../../classes/dynamic-forms/boolean-form/boolean-form';
 import { NumberForm } from '../../classes/dynamic-forms/number-form/number-form';
@@ -15,6 +16,7 @@ import { SelectGroupForm } from '../../classes/dynamic-forms/select-group-form/s
 import { AutocompleteForm } from '../../classes/dynamic-forms/autocomplete-form/autocomplete-form';
 import { map, Observable, startWith } from 'rxjs';
 import { IAutocompleteOptions } from '../../interfaces/base-form/i-autocomplete-options';
+import { RadioGroupForm } from '../../classes/dynamic-forms/radio-group-form/radio-group-form';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -46,6 +48,7 @@ export class DynamicFormComponent<
     | NumberForm<ControlsType>
     | SelectGroupForm<ControlsType>
     | AutocompleteForm<ControlsType>
+    | RadioGroupForm<ControlsType>
 > implements OnInit
 {
   @Input()
