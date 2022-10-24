@@ -1,4 +1,5 @@
 <div [ngSwitch]="dynamicForm.controlType">
+  <ng-container *ngTemplateOutlet="componentTop ?? null"></ng-container>
   <div *ngSwitchCase="'text'">
     <mat-form-field
       [id]="dynamicForm.key"
@@ -80,4 +81,5 @@
       </mat-autocomplete>
     </mat-form-field>
   </div>
+  <ng-container *ngTemplateOutlet="componentBottom ?? null"></ng-container>
 </div>

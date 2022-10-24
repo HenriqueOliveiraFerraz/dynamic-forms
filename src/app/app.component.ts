@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   Component,
+  ElementRef,
   OnInit,
   QueryList,
   ViewChild,
@@ -36,6 +37,10 @@ export class AppComponent implements OnInit, AfterViewInit {
       | AutocompleteForm<UserRegistrationFormControls>
     >
   >;
+  @ViewChild('dynamicFormComponentTop')
+  dynamicFormComponentTop!: ElementRef;
+  @ViewChild('dynamicFormComponentBottom')
+  dynamicFormComponentBottom!: ElementRef;
 
   constructor(private formService: FormService) {}
 
@@ -47,8 +52,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.dynamicFormComponents.forEach((f) => {
-      console.log(f);
-    });
+    this.dynamicFormComponents.forEach((f) => {});
   }
 }

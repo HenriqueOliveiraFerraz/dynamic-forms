@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule, FormControl } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -50,6 +50,10 @@ export class DynamicFormComponent<
 {
   @Input()
   dynamicForm!: FormType;
+  @Input()
+  componentTop?: TemplateRef<any>;
+  @Input()
+  componentBottom?: TemplateRef<any>;
 
   selectGroupForm?: SelectGroupForm<ControlsType>;
   autocompleteForm?: AutocompleteForm<ControlsType>;

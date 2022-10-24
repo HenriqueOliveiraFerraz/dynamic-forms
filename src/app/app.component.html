@@ -1,5 +1,18 @@
 <form [formGroup]="userFormGroup">
   <div *ngFor="let form of user.getDynamicForms()">
-    <app-dynamic-form [id]="form.key" [dynamicForm]="form"> </app-dynamic-form>
+    <app-dynamic-form
+      [id]="form.key"
+      [dynamicForm]="form"
+      [componentTop]="dynamicFormComponentTop"
+      [componentBottom]="dynamicFormComponentBottom"
+    >
+    </app-dynamic-form>
   </div>
 </form>
+
+<ng-template #dynamicFormComponentTop>
+  <h4>h4 title dynamicFormComponentTop</h4>
+</ng-template>
+<ng-template #dynamicFormComponentBottom>
+  <h4>h4 title dynamicFormComponentBottom</h4>
+</ng-template>
