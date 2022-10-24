@@ -2,47 +2,76 @@
   <ng-container *ngTemplateOutlet="componentTop ?? null"></ng-container>
   <div *ngSwitchCase="'text'">
     <mat-form-field
-      [id]="dynamicForm.key"
+      [id]="dynamicForm.key.toString() + 'MatFormFieldTextForm'"
       [appearance]="dynamicForm.matFormFieldAppearance"
     >
-      <mat-label [attr.for]="dynamicForm.key" *ngIf="dynamicForm.label">{{
-        dynamicForm.label
-      }}</mat-label>
+      <mat-label
+        [id]="dynamicForm.key.toString() + 'MatLabelTextForm'"
+        *ngIf="dynamicForm.label"
+        >{{ dynamicForm.label }}</mat-label
+      >
       <input
         matInput
+        [id]="dynamicForm.key.toString() + 'MatInputTextForm'"
         [placeholder]="dynamicForm.placeholder"
         [formControl]="dynamicForm.formControl"
       />
-      <mat-hint *ngIf="dynamicForm.hint">{{ dynamicForm.hint }}</mat-hint>
-      <mat-error *ngIf="dynamicForm.formControl.invalid">{{
-        dynamicForm.error
-      }}</mat-error>
+      <mat-hint
+        [id]="dynamicForm.key.toString() + 'MatHintTextForm'"
+        *ngIf="dynamicForm.hint"
+        >{{ dynamicForm.hint }}</mat-hint
+      >
+      <mat-error
+        [id]="dynamicForm.key.toString() + 'MatErrorTextForm'"
+        *ngIf="dynamicForm.formControl.invalid"
+        >{{ dynamicForm.error }}</mat-error
+      >
     </mat-form-field>
   </div>
   <div *ngSwitchCase="'boolean'">
     <mat-checkbox
-      [id]="dynamicForm.key.toString()"
+      [id]="dynamicForm.key.toString() + 'MatCheckboxBooleanForm'"
       [formControl]="dynamicForm.formControl"
       >{{ dynamicForm.label }}</mat-checkbox
     >
   </div>
   <div *ngSwitchCase="'selectGroup'">
     <mat-form-field
-      [id]="selectGroupForm!.key"
+      [id]="selectGroupForm!.key.toString() + 'MatFormFieldSelectGroupForm'"
       [appearance]="selectGroupForm!.matFormFieldAppearance"
     >
-      <mat-label>{{ selectGroupForm!.label }}</mat-label>
+      <mat-label
+        [id]="selectGroupForm!.key.toString() + 'MatLabelSelectGroupForm'"
+        >{{ selectGroupForm!.label }}</mat-label
+      >
       <mat-select
+        [id]="selectGroupForm!.key.toString() + 'MatSelectSelectGroupForm'"
         [formControl]="selectGroupForm!.formControl"
         [placeholder]="selectGroupForm!.placeholder"
       >
-        <mat-option>{{ selectGroupForm!.emptyOptionsLabel }}</mat-option>
+        <mat-option
+          [id]="selectGroupForm!.key.toString() + 'MatOptionSelectGroupForm'"
+          >{{ selectGroupForm!.emptyOptionsLabel }}</mat-option
+        >
         <mat-optgroup
           *ngFor="let group of selectGroupForm!.groupOptions"
+          [id]="
+            selectGroupForm!.key.toString() +
+            'MatOptGroupSelectGroupForm' +
+            group.name
+          "
           [label]="group.name"
           [disabled]="group.disabled"
         >
-          <mat-option *ngFor="let item of group.array" [value]="item.key">
+          <mat-option
+            [id]="
+              selectGroupForm!.key.toString() +
+              'MatOptGroupSelectGroupForm' +
+              item.key
+            "
+            *ngFor="let item of group.array"
+            [value]="item.key"
+          >
             {{ item.value }}
           </mat-option>
         </mat-optgroup>
@@ -51,29 +80,61 @@
   </div>
   <div *ngSwitchCase="'autocomplete'">
     <mat-form-field
-      [id]="autocompleteForm!.key"
+      [id]="autocompleteForm!.key.toString() + 'MatFormFieldAutocompleteForm'"
       [appearance]="autocompleteForm!.matFormFieldAppearance"
     >
-      <mat-label>{{ autocompleteForm!.label }}</mat-label>
+      <mat-label
+        [id]="autocompleteForm!.key.toString() + 'MatLabelAutocompleteForm'"
+        >{{ autocompleteForm!.label }}</mat-label
+      >
       <input
         matInput
+        [id]="autocompleteForm!.key.toString() + 'MatInputAutocompleteForm'"
         [matAutocomplete]="auto"
         [formControl]="autocompleteForm!.formControl"
       />
-      <mat-autocomplete #auto="matAutocomplete">
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        [id]="
+          autocompleteForm!.key.toString() + 'MatAutocompleteAutocompleteForm'
+        "
+      >
         <mat-option
           *ngFor="let autocomplete of filteredAutocompleteOptions | async"
+          [id]="
+            autocompleteForm!.key.toString() +
+            'MatOptionAutocompleteForm' +
+            autocomplete.key
+          "
           [value]="autocomplete.value"
         >
           <img
             aria-hidden
+            [id]="
+              autocompleteForm!.key.toString() +
+              'ImgAutocompleteForm' +
+              autocomplete.key
+            "
             [src]="autocomplete.img?.src"
             [alt]="autocomplete.img?.alt"
             [width]="autocomplete.img?.width"
             [height]="autocomplete.img?.height"
           />
-          <span>{{ autocomplete.value }}</span> |
+          <span
+            [id]="
+              autocompleteForm!.key.toString() +
+              'SpanAutocompleteForm' +
+              autocomplete.key
+            "
+            >{{ autocomplete.value }}</span
+          >
+          |
           <small
+            [id]="
+              autocompleteForm!.key.toString() +
+              'SmallAutocompleteForm' +
+              autocomplete.key
+            "
             >{{ autocompleteForm!.smallElementLabel
             }}{{ autocomplete.value }}</small
           >

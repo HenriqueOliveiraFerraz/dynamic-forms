@@ -4,13 +4,13 @@ import {
   ElementRef,
   OnInit,
   QueryList,
+  TemplateRef,
   ViewChild,
   ViewChildren,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { AutocompleteForm } from './shared/classes/dynamic-forms/autocomplete-form/autocomplete-form';
 import { BooleanForm } from './shared/classes/dynamic-forms/boolean-form/boolean-form';
-import { NumberForm } from './shared/classes/dynamic-forms/number-form/number-form';
 import { SelectGroupForm } from './shared/classes/dynamic-forms/select-group-form/select-group-form';
 import { TextForm } from './shared/classes/dynamic-forms/text-form/text-form';
 import { User } from './shared/classes/user/user';
@@ -38,9 +38,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     >
   >;
   @ViewChild('dynamicFormComponentTop')
-  dynamicFormComponentTop!: ElementRef;
+  dynamicFormComponentTop!: TemplateRef<any>;
   @ViewChild('dynamicFormComponentBottom')
-  dynamicFormComponentBottom!: ElementRef;
+  dynamicFormComponentBottom!: TemplateRef<any>;
 
   constructor(private formService: FormService) {}
 
