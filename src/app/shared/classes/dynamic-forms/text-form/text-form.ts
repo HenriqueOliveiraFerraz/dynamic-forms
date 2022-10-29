@@ -3,12 +3,16 @@ import { IBaseFormOptions } from 'src/app/shared/interfaces/base-form/i-base-for
 import { BaseForm } from '../base-form/base-form';
 
 export class TextForm<
-  ObjectKey extends {
-    [Properties in keyof ObjectKey]: ObjectKey[Properties];
+  ControlsType extends {
+    [Properties in keyof ControlsType as string]:
+      | FormControl<string | null>
+      | FormControl<boolean | null>
+      | FormControl<number | null>
+      | FormControl<string | number | null>;
   }
-> extends BaseForm<string | null, ObjectKey> {
+> extends BaseForm<string | null, ControlsType> {
   constructor(
-    key: keyof ObjectKey,
+    key: keyof ControlsType,
     value: string | null,
     baseFormOptions: IBaseFormOptions = {}
   ) {

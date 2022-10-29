@@ -37,10 +37,11 @@ import { RadioGroupForm } from '../../classes/dynamic-forms/radio-group-form/rad
 })
 export class DynamicFormComponent<
   ControlsType extends {
-    [Properties in keyof ControlsType]:
+    [Properties in keyof ControlsType as string]:
       | FormControl<string | null>
       | FormControl<boolean | null>
-      | FormControl<number | null>;
+      | FormControl<number | null>
+      | FormControl<string | number | null>;
   },
   FormType extends
     | TextForm<ControlsType>

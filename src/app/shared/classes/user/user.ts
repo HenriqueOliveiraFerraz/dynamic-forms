@@ -30,7 +30,7 @@ export class User implements IUser {
     this.stateName = stateName;
     this.favoriteSeason = favoriteSeason;
 
-    this.generateDynamicForms();
+    this.dynamicForms = this.generateDynamicForms();
   }
 
   userName: string;
@@ -45,96 +45,87 @@ export class User implements IUser {
   getDynamicForms(): (
     | TextForm<UserRegistrationFormControls>
     | BooleanForm<UserRegistrationFormControls>
-    | SelectGroupForm<UserRegistrationFormControls>
-    | AutocompleteForm<UserRegistrationFormControls>
-    | RadioGroupForm<UserRegistrationFormControls>
   )[] {
     return this.dynamicForms;
   }
 
-  private dynamicForms: (
-    | TextForm<UserRegistrationFormControls>
-    | BooleanForm<UserRegistrationFormControls>
-    | SelectGroupForm<UserRegistrationFormControls>
-    | AutocompleteForm<UserRegistrationFormControls>
-    | RadioGroupForm<UserRegistrationFormControls>
-  )[] = [];
+  dynamicForms: Array<TextForm<UserRegistrationFormControls>> = [];
 
-  private generateDynamicForms(): void {
-    this.dynamicForms = [
-      new TextForm('userName', this.userName, {
+  private generateDynamicForms() {
+    return [
+      new TextForm('userName', '', {
         validators: [Validators.required],
         label: 'Username',
         error: 'Username required',
         required: true,
         order: 1,
       }),
-      new TextForm('emailAddress', this.emailAddress, {
+      new TextForm('emailAddress', '', {
         validators: [Validators.required, Validators.email],
         label: 'Email Address',
         error: 'Email required',
         required: true,
         order: 2,
       }),
-      new TextForm('password', this.password, {
+      new TextForm('password', '', {
         validators: [Validators.required],
         label: 'Password',
         error: 'Password required',
         required: true,
         order: 3,
       }),
-      new TextForm('mobilePhone', this.mobilePhone, {
+      new TextForm('mobilePhone', '', {
         validators: [Validators.required],
         label: 'Mobile Phone',
         error: 'Mobile Phone required',
         required: true,
         order: 4,
       }),
-      new BooleanForm('authorizedUseOfData', this.authorizedUseOfData, {
-        validators: [Validators.requiredTrue],
-        label: 'Authorization to use data',
-        error: 'Authorization required',
-        required: true,
-        order: 5,
-      }),
-      new SelectGroupForm(
-        'pokemonGroupName',
-        this.pokemonGroupName,
-        PokemonGroup.getPokemons(),
-        '-- None --',
-        {
-          validators: [Validators.required],
-          label: 'Choose your pokemon group',
-          error: 'Pokemon group required',
-          required: true,
-          order: 6,
-        }
-      ),
-      new AutocompleteForm(
-        'stateName',
-        this.stateName,
-        State.getStates(),
-        'Population: ',
-        {
-          validators: [Validators.required],
-          label: 'Choose your state',
-          error: 'State is required',
-          required: true,
-          order: 7,
-        }
-      ),
-      new RadioGroupForm(
-        'favoriteSeason',
-        this.favoriteSeason,
-        Season.getSeasons(),
-        {
-          validators: [Validators.required],
-          label: 'Choose your state',
-          error: 'State is required',
-          required: true,
-          order: 8,
-        }
-      ),
+      // new BooleanForm('authorizedUseOfData', false, {
+      //   validators: [Validators.requiredTrue],
+      //   label: 'Authorization to use data',
+      //   error: 'Authorization required',
+      //   required: true,
+      //   order: 5,
+      // }),
+      // new SelectGroupForm(
+      //   'pokemonGroupName',
+      //   this.pokemonGroupName,
+      //   PokemonGroup.getPokemons(),
+      //   '-- None --',
+      //   {
+      //     validators: [Validators.required],
+      //     label: 'Choose your pokemon group',
+      //     error: 'Pokemon group required',
+      //     required: true,
+      //     order: 6,
+      //   }
+      // ),
+      // new AutocompleteForm(
+      //   'stateName',
+      //   this.stateName,
+      //   State.getStates(),
+      //   'Population: ',
+      //   {
+      //     validators: [Validators.required],
+      //     label: 'Choose your state',
+      //     error: 'State is required',
+      //     required: true,
+      //     order: 7,
+      //   }
+      // ),
+      // new RadioGroupForm(
+      //   'favoriteSeason',
+      //   this.favoriteSeason,
+      //   Season.getSeasons(),
+      //   {
+      //     validators: [Validators.required],
+      //     label: 'Choose your state',
+      //     error: 'State is required',
+      //     required: true,
+      //     order: 8,
+      //   }
+      // ),
     ];
   }
 }

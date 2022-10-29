@@ -1,13 +1,21 @@
-import { ValidatorFn, AsyncValidatorFn } from '@angular/forms';
+import { ValidatorFn, AsyncValidatorFn, FormControl } from '@angular/forms';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { IBaseForm } from '../../../interfaces/base-form/i-base-form';
 import { IBaseFormOptions } from '../../../interfaces/base-form/i-base-form-options';
 
-export class BaseForm<ValueType, ObjectKey extends {}>
-  implements IBaseForm<ValueType, ObjectKey>, IBaseFormOptions
+export class BaseForm<
+  ValueType extends string | number | boolean | null,
+  ControlsType extends {
+    [Properties in keyof ControlsType as string]:
+      | FormControl<string | null>
+      | FormControl<boolean | null>
+      | FormControl<number | null>
+      | FormControl<string | number | null>;
+  }
+> implements IBaseForm<ValueType, ControlsType>, IBaseFormOptions
 {
-  key: string | keyof ObjectKey;
-  value: ValueType | null;
+  key: keyof ControlsType;
+  value: ValueType;
   formControlName: string | number;
   matFormFieldAppearance: MatFormFieldAppearance;
   nonNullable: boolean;
@@ -27,13 +35,13 @@ export class BaseForm<ValueType, ObjectKey extends {}>
   type: string;
 
   constructor(
-    key: string | keyof ObjectKey,
-    value: ValueType | null,
+    key: string | keyof ControlsType,
+    value: ValueType,
     baseFormOptions: IBaseFormOptions = {}
   ) {
     this.key = key;
     this.value = value;
-    this.formControlName = key as string | number;
+    this.formControlName = key as string;
     this.matFormFieldAppearance =
       baseFormOptions.matFormFieldAppearance ?? 'outline';
     this.nonNullable = baseFormOptions.nonNullable ?? true;

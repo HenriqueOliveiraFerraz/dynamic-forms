@@ -24,21 +24,10 @@ import { UserRegistrationFormControls } from './shared/types/user-forms/user-reg
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit {
   user!: User;
   userFormGroup!: FormGroup<UserRegistrationFormControls>;
 
-  @ViewChildren(DynamicFormComponent)
-  dynamicFormComponents!: QueryList<
-    DynamicFormComponent<
-      UserRegistrationFormControls,
-      | TextForm<UserRegistrationFormControls>
-      | BooleanForm<UserRegistrationFormControls>
-      | SelectGroupForm<UserRegistrationFormControls>
-      | AutocompleteForm<UserRegistrationFormControls>
-      | RadioGroupForm<UserRegistrationFormControls>
-    >
-  >;
   @ViewChild('dynamicFormComponentTop')
   dynamicFormComponentTop!: TemplateRef<any>;
   @ViewChild('dynamicFormComponentBottom')
@@ -48,12 +37,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.user = new User('', '', '', '', false, '', '', '');
-    this.userFormGroup = this.formService.toFormGroup(
-      this.user.getDynamicForms()
+    this.formService.toFormGroup<UserRegistrationFormControls>(
+      this.user.dynamicForms
     );
-  }
-
-  ngAfterViewInit(): void {
-    this.dynamicFormComponents.forEach((f) => {});
   }
 }
