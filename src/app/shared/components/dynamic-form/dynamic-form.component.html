@@ -2,6 +2,7 @@
   <ng-container *ngTemplateOutlet="componentTop ?? null"></ng-container>
   <div *ngSwitchCase="'text'">
     <mat-form-field
+      class="{{ dynamicForm.class }}"
       [id]="dynamicForm.key.toString() + 'MatFormFieldTextForm'"
       [appearance]="dynamicForm.matFormFieldAppearance"
     >
@@ -141,6 +142,19 @@
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
+  </div>
+  <div *ngSwitchCase="'radioGroup'">
+    <mat-radio-group
+      [id]="radioGroupForm!.key.toString() + 'MatRadioGroupForm'"
+      [formControl]="radioGroupForm!.formControl"
+    >
+      <mat-radio-button
+        *ngFor="let option of radioGroupForm!.options"
+        [value]="option.key"
+      >
+        {{ option.value }}
+      </mat-radio-button>
+    </mat-radio-group>
   </div>
   <ng-container *ngTemplateOutlet="componentBottom ?? null"></ng-container>
 </div>

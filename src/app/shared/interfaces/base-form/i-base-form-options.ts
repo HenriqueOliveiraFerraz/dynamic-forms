@@ -8,6 +8,7 @@ export interface IBaseFormOptions {
   updateOn?: 'change' | 'blur' | 'submit';
   validators?: ValidatorFn[] | null;
   asyncValidators?: AsyncValidatorFn[] | null;
+  class?: string;
   error?: string;
   placeholder?: string;
   label?: string;

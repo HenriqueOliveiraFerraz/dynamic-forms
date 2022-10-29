@@ -37,8 +37,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = new User('', '', '', '', false, '', '', '');
-    this.formService.toFormGroup<UserRegistrationFormControls>(
-      this.user.dynamicForms
-    );
+    this.userFormGroup = this.formService.toFormGroup(this.user.dynamicForms);
   }
 }

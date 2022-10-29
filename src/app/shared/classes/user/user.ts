@@ -42,19 +42,19 @@ export class User implements IUser {
   stateName: string;
   favoriteSeason: string;
 
-  getDynamicForms(): (
+  dynamicForms: Array<
     | TextForm<UserRegistrationFormControls>
     | BooleanForm<UserRegistrationFormControls>
-  )[] {
-    return this.dynamicForms;
-  }
-
-  dynamicForms: Array<TextForm<UserRegistrationFormControls>> = [];
+    | SelectGroupForm<UserRegistrationFormControls>
+    | AutocompleteForm<UserRegistrationFormControls>
+    | RadioGroupForm<UserRegistrationFormControls>
+  > = [];
 
   private generateDynamicForms() {
     return [
       new TextForm('userName', '', {
         validators: [Validators.required],
+        class: 'teste',
         label: 'Username',
         error: 'Username required',
         required: true,
@@ -81,51 +81,51 @@ export class User implements IUser {
         required: true,
         order: 4,
       }),
-      // new BooleanForm('authorizedUseOfData', false, {
-      //   validators: [Validators.requiredTrue],
-      //   label: 'Authorization to use data',
-      //   error: 'Authorization required',
-      //   required: true,
-      //   order: 5,
-      // }),
-      // new SelectGroupForm(
-      //   'pokemonGroupName',
-      //   this.pokemonGroupName,
-      //   PokemonGroup.getPokemons(),
-      //   '-- None --',
-      //   {
-      //     validators: [Validators.required],
-      //     label: 'Choose your pokemon group',
-      //     error: 'Pokemon group required',
-      //     required: true,
-      //     order: 6,
-      //   }
-      // ),
-      // new AutocompleteForm(
-      //   'stateName',
-      //   this.stateName,
-      //   State.getStates(),
-      //   'Population: ',
-      //   {
-      //     validators: [Validators.required],
-      //     label: 'Choose your state',
-      //     error: 'State is required',
-      //     required: true,
-      //     order: 7,
-      //   }
-      // ),
-      // new RadioGroupForm(
-      //   'favoriteSeason',
-      //   this.favoriteSeason,
-      //   Season.getSeasons(),
-      //   {
-      //     validators: [Validators.required],
-      //     label: 'Choose your state',
-      //     error: 'State is required',
-      //     required: true,
-      //     order: 8,
-      //   }
-      // ),
+      new BooleanForm('authorizedUseOfData', false, {
+        validators: [Validators.requiredTrue],
+        label: 'Authorization to use data',
+        error: 'Authorization required',
+        required: true,
+        order: 5,
+      }),
+      new SelectGroupForm(
+        'pokemonGroupName',
+        this.pokemonGroupName,
+        PokemonGroup.getPokemons(),
+        '-- None --',
+        {
+          validators: [Validators.required],
+          label: 'Choose your pokemon group',
+          error: 'Pokemon group required',
+          required: true,
+          order: 6,
+        }
+      ),
+      new AutocompleteForm(
+        'stateName',
+        this.stateName,
+        State.getStates(),
+        'Population: ',
+        {
+          validators: [Validators.required],
+          label: 'Choose your state',
+          error: 'State is required',
+          required: true,
+          order: 7,
+        }
+      ),
+      new RadioGroupForm(
+        'favoriteSeason',
+        this.favoriteSeason,
+        Season.getSeasons(),
+        {
+          validators: [Validators.required],
+          label: 'Choose your state',
+          error: 'State is required',
+          required: true,
+          order: 8,
+        }
+      ),
     ];
   }
 }

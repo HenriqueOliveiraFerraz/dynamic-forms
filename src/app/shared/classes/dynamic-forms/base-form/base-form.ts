@@ -22,6 +22,7 @@ export class BaseForm<
   updateOn: 'change' | 'blur' | 'submit';
   validators: ValidatorFn[] | null;
   asyncValidators: AsyncValidatorFn[] | null;
+  class: string;
   error: string;
   placeholder: string;
   label: string;
@@ -48,6 +49,7 @@ export class BaseForm<
     this.updateOn = baseFormOptions.updateOn ?? 'change';
     this.validators = baseFormOptions.validators ?? null;
     this.asyncValidators = baseFormOptions.asyncValidators ?? null;
+    this.class = baseFormOptions.class || '';
     this.error = baseFormOptions.error || '';
     this.placeholder = baseFormOptions.placeholder || '';
     this.label = baseFormOptions.label || '';

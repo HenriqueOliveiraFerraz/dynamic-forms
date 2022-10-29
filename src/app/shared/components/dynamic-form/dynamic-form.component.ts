@@ -31,6 +31,7 @@ import { RadioGroupForm } from '../../classes/dynamic-forms/radio-group-form/rad
     MatCheckboxModule,
     MatSelectModule,
     MatAutocompleteModule,
+    MatRadioModule,
   ],
   templateUrl: './dynamic-form.component.html',
   styleUrls: ['./dynamic-form.component.scss'],
@@ -61,6 +62,7 @@ export class DynamicFormComponent<
 
   selectGroupForm?: SelectGroupForm<ControlsType>;
   autocompleteForm?: AutocompleteForm<ControlsType>;
+  radioGroupForm?: RadioGroupForm<ControlsType>;
   filteredAutocompleteOptions?: Observable<IAutocompleteOptions[]>;
 
   ngOnInit(): void {
@@ -75,6 +77,10 @@ export class DynamicFormComponent<
     } else if (this.dynamicForm instanceof AutocompleteForm<ControlsType>) {
       this.configureAutocomplete(
         this.dynamicForm as AutocompleteForm<ControlsType>
+      );
+    } else if (this.dynamicForm instanceof RadioGroupForm<ControlsType>) {
+      this.configureRadioGroup(
+        this.dynamicForm as RadioGroupForm<ControlsType>
       );
     }
   }
@@ -94,6 +100,10 @@ export class DynamicFormComponent<
             : this.autocompleteForm!.autocompleteOptions.slice()
         )
       );
+  }
+
+  configureRadioGroup(radio: RadioGroupForm<ControlsType>): void {
+    this.radioGroupForm = radio;
   }
 
   filterAuto(value: string): IAutocompleteOptions[] {

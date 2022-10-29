@@ -13,12 +13,25 @@ import { TextForm } from '../classes/dynamic-forms/text-form/text-form';
 export class FormService {
   toFormGroup<
     ControlsType extends {
-      [Properties in keyof ControlsType]: FormControl<string | null>;
+      [Properties in keyof ControlsType]:
+        | FormControl<string | null>
+        | FormControl<boolean | null>
+        | FormControl<number | null>
+        | FormControl<string | number | null>;
     },
-    InputType extends TextForm<ControlsType> = TextForm<ControlsType>
-  >(inputs: InputType[]) {
+    FormType extends
+      | TextForm<ControlsType>
+      | BooleanForm<ControlsType>
+      | SelectGroupForm<ControlsType>
+      | AutocompleteForm<ControlsType>
+      | RadioGroupForm<ControlsType>
+  >(inputs: FormType[]) {
     let controls: {
-      [key: string]: FormControl<string | null>;
+      [key: string]:
+        | FormControl<string | null>
+        | FormControl<boolean | null>
+        | FormControl<number | null>
+        | FormControl<string | number | null>;
     } = inputs.reduce((accumulator, value) => {
       return {
         ...accumulator,
