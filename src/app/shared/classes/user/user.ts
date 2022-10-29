@@ -54,7 +54,7 @@ export class User implements IUser {
     return [
       new TextForm('userName', '', {
         validators: [Validators.required],
-        class: 'teste',
+        baseClass: 'teste',
         label: 'Username',
         error: 'Username required',
         required: true,

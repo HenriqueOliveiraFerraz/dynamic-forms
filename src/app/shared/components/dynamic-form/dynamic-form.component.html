@@ -2,7 +2,7 @@
   <ng-container *ngTemplateOutlet="componentTop ?? null"></ng-container>
   <div *ngSwitchCase="'text'">
     <mat-form-field
-      class="{{ dynamicForm.class }}"
+      class="{{ dynamicForm.baseClass }}"
       [id]="dynamicForm.key.toString() + 'MatFormFieldTextForm'"
       [appearance]="dynamicForm.matFormFieldAppearance"
     >
@@ -31,6 +31,7 @@
   </div>
   <div *ngSwitchCase="'boolean'">
     <mat-checkbox
+      class="{{ dynamicForm.baseClass }}"
       [id]="dynamicForm.key.toString() + 'MatCheckboxBooleanForm'"
       [formControl]="dynamicForm.formControl"
       >{{ dynamicForm.label }}</mat-checkbox
@@ -38,6 +39,7 @@
   </div>
   <div *ngSwitchCase="'selectGroup'">
     <mat-form-field
+      class="{{ dynamicForm.baseClass }}"
       [id]="selectGroupForm!.key.toString() + 'MatFormFieldSelectGroupForm'"
       [appearance]="selectGroupForm!.matFormFieldAppearance"
     >
@@ -81,6 +83,7 @@
   </div>
   <div *ngSwitchCase="'autocomplete'">
     <mat-form-field
+      class="{{ dynamicForm.baseClass }}"
       [id]="autocompleteForm!.key.toString() + 'MatFormFieldAutocompleteForm'"
       [appearance]="autocompleteForm!.matFormFieldAppearance"
     >
@@ -145,6 +148,7 @@
   </div>
   <div *ngSwitchCase="'radioGroup'">
     <mat-radio-group
+      class="{{ dynamicForm.baseClass }}"
       [id]="radioGroupForm!.key.toString() + 'MatRadioGroupForm'"
       [formControl]="radioGroupForm!.formControl"
     >
