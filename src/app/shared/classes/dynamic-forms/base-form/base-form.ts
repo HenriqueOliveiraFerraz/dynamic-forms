@@ -6,7 +6,7 @@ import { IBaseFormOptions } from '../../../interfaces/base-form/i-base-form-opti
 export class BaseForm<
   ValueType extends string | number | boolean | null,
   ControlsType extends {
-    [Properties in keyof ControlsType as string]:
+    [Properties in keyof ControlsType]:
       | FormControl<string | null>
       | FormControl<boolean | null>
       | FormControl<number | null>
@@ -35,7 +35,7 @@ export class BaseForm<
   type: string;
 
   constructor(
-    key: string | keyof ControlsType,
+    key: keyof ControlsType,
     value: ValueType,
     baseFormOptions: IBaseFormOptions = {}
   ) {

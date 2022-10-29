@@ -13,12 +13,19 @@ import { TextForm } from '../classes/dynamic-forms/text-form/text-form';
 export class FormService {
   toFormGroup<
     ControlsType extends {
-      [Properties in keyof ControlsType as string]: FormControl<string | null>;
+      [Properties in keyof ControlsType]: FormControl<string | null>;
     },
     InputType extends TextForm<ControlsType> = TextForm<ControlsType>
   >(inputs: InputType[]) {
-    inputs.forEach((value) => {
-      console.log(value);
-    });
+    let controls: {
+      [key: string]: FormControl<string | null>;
+    } = inputs.reduce((accumulator, value) => {
+      return {
+        ...accumulator,
+        [value.key as keyof ControlsType as string]: value.formControl,
+      };
+    }, {});
+
+    return new FormGroup(controls as ControlsType);
   }
 }

@@ -6,7 +6,7 @@ import { BaseForm } from '../base-form/base-form';
 
 export class AutocompleteForm<
   ControlsType extends {
-    [Properties in keyof ControlsType as string]:
+    [Properties in keyof ControlsType]:
       | FormControl<string | null>
       | FormControl<boolean | null>
       | FormControl<number | null>
