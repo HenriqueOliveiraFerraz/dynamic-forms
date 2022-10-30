@@ -11,6 +11,7 @@ import {
 import { FormGroup } from '@angular/forms';
 import { AutocompleteForm } from './shared/classes/dynamic-forms/autocomplete-form/autocomplete-form';
 import { BooleanForm } from './shared/classes/dynamic-forms/boolean-form/boolean-form';
+import { ObjectForm } from './shared/classes/dynamic-forms/object-form/object-form';
 import { RadioGroupForm } from './shared/classes/dynamic-forms/radio-group-form/radio-group-form';
 import { SelectGroupForm } from './shared/classes/dynamic-forms/select-group-form/select-group-form';
 import { TextForm } from './shared/classes/dynamic-forms/text-form/text-form';
@@ -36,7 +37,15 @@ export class AppComponent implements OnInit {
   constructor(private formService: FormService) {}
 
   ngOnInit(): void {
-    this.user = new User('', '', '', '', false, '', '', '');
+    //let teste = new ObjectForm('', [new TextForm('', '')]);
+    this.user = new User('', '', '', '', false, '', '', '', {
+      street: 'Rua Terra Roxa',
+      district: 'Jardim La Salle',
+      houseNumber: 612,
+      zipCode: '85903020',
+      state: 'PR',
+      country: 'BRA',
+    });
     this.userFormGroup = this.formService.toFormGroup(this.user.dynamicForms);
   }
 }

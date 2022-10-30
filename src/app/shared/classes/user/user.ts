@@ -1,4 +1,5 @@
 import { Validators } from '@angular/forms';
+import { IAddress } from '../../interfaces/address/i-address';
 import { IUser } from '../../interfaces/user/i-user';
 import { UserRegistrationFormControls } from '../../types/user-forms/user-registration-form-controls';
 import { AutocompleteForm } from '../dynamic-forms/autocomplete-form/autocomplete-form';
@@ -19,7 +20,8 @@ export class User implements IUser {
     authorizedUseOfData: boolean,
     pokemonGroupName: string,
     stateName: string,
-    favoriteSeason: string
+    favoriteSeason: string,
+    address: IAddress
   ) {
     this.userName = userName;
     this.emailAddress = emailAddress;
@@ -29,6 +31,7 @@ export class User implements IUser {
     this.pokemonGroupName = pokemonGroupName;
     this.stateName = stateName;
     this.favoriteSeason = favoriteSeason;
+    this.address = address;
 
     this.dynamicForms = this.generateDynamicForms();
   }
@@ -41,6 +44,7 @@ export class User implements IUser {
   pokemonGroupName: string;
   stateName: string;
   favoriteSeason: string;
+  address: IAddress;
 
   dynamicForms: Array<
     | TextForm<UserRegistrationFormControls>
