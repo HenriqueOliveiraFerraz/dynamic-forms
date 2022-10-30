@@ -1,9 +1,11 @@
 import { Validators } from '@angular/forms';
 import { IAddress } from '../../interfaces/address/i-address';
 import { IUser } from '../../interfaces/user/i-user';
-import { UserRegistrationFormControls } from '../../types/user-forms/user-registration-form-controls';
+import { UserAddressFormControls } from '../../types/user-forms/user-address-form.controls';
+import { UserRegistrationForms } from '../../types/user-forms/user-registration-forms';
 import { AutocompleteForm } from '../dynamic-forms/autocomplete-form/autocomplete-form';
 import { BooleanForm } from '../dynamic-forms/boolean-form/boolean-form';
+import { ObjectForm } from '../dynamic-forms/object-form/object-form';
 import { RadioGroupForm } from '../dynamic-forms/radio-group-form/radio-group-form';
 import { SelectGroupForm } from '../dynamic-forms/select-group-form/select-group-form';
 import { TextForm } from '../dynamic-forms/text-form/text-form';
@@ -33,7 +35,7 @@ export class User implements IUser {
     this.favoriteSeason = favoriteSeason;
     this.address = address;
 
-    this.dynamicForms = this.generateDynamicForms();
+    //this.dynamicForms = this.generateDynamicForms();
   }
 
   userName: string;
@@ -46,13 +48,7 @@ export class User implements IUser {
   favoriteSeason: string;
   address: IAddress;
 
-  dynamicForms: Array<
-    | TextForm<UserRegistrationFormControls>
-    | BooleanForm<UserRegistrationFormControls>
-    | SelectGroupForm<UserRegistrationFormControls>
-    | AutocompleteForm<UserRegistrationFormControls>
-    | RadioGroupForm<UserRegistrationFormControls>
-  > = [];
+  dynamicForms!: ObjectForm<UserRegistrationForms, UserAddressFormControls>;
 
   private generateDynamicForms() {
     return [
@@ -124,12 +120,35 @@ export class User implements IUser {
         Season.getSeasons(),
         {
           validators: [Validators.required],
-          label: 'Choose your state',
-          error: 'State is required',
+          label: 'Choose your favorite season',
+          error: 'Favorite season is required',
           required: true,
           order: 8,
         }
       ),
+      // new ObjectForm<UserAddressFormControls>([
+      //   new TextForm('street', '', {
+      //     validators: [Validators.required],
+      //     label: 'Street',
+      //     error: 'Street is required',
+      //     required: true,
+      //     order: 1,
+      //   }),
+      //   new TextForm('state', '', {
+      //     validators: [Validators.required],
+      //     label: 'State',
+      //     error: 'State is required',
+      //     required: true,
+      //     order: 2,
+      //   }),
+      //   new TextForm('district', '', {
+      //     validators: [Validators.required],
+      //     label: 'District',
+      //     error: 'District is required',
+      //     required: true,
+      //     order: 3,
+      //   }),
+      // ]),
     ];
   }
 }

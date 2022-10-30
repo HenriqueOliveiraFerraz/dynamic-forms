@@ -17,8 +17,10 @@ import { SelectGroupForm } from './shared/classes/dynamic-forms/select-group-for
 import { TextForm } from './shared/classes/dynamic-forms/text-form/text-form';
 import { User } from './shared/classes/user/user';
 import { DynamicFormComponent } from './shared/components/dynamic-form/dynamic-form.component';
+import { IAddress } from './shared/interfaces/address/i-address';
 import { FormService } from './shared/services/form.service';
-import { UserRegistrationFormControls } from './shared/types/user-forms/user-registration-form-controls';
+import { UserAddressFormControls } from './shared/types/user-forms/user-address-form.controls';
+import { UserRegistrationForms } from './shared/types/user-forms/user-registration-forms';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +29,7 @@ import { UserRegistrationFormControls } from './shared/types/user-forms/user-reg
 })
 export class AppComponent implements OnInit {
   user!: User;
-  userFormGroup!: FormGroup<UserRegistrationFormControls>;
+  userFormGroup!: FormGroup<UserRegistrationForms>;
 
   @ViewChild('dynamicFormComponentTop')
   dynamicFormComponentTop!: TemplateRef<any>;
@@ -37,7 +39,6 @@ export class AppComponent implements OnInit {
   constructor(private formService: FormService) {}
 
   ngOnInit(): void {
-    //let teste = new ObjectForm('', [new TextForm('', '')]);
     this.user = new User('', '', '', '', false, '', '', '', {
       street: 'Rua Terra Roxa',
       district: 'Jardim La Salle',
@@ -46,6 +47,6 @@ export class AppComponent implements OnInit {
       state: 'PR',
       country: 'BRA',
     });
-    this.userFormGroup = this.formService.toFormGroup(this.user.dynamicForms);
+    //this.userFormGroup = this.formService.toFormGroup(this.user.dynamicForms);
   }
 }

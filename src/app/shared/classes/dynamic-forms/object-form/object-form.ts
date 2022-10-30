@@ -1,4 +1,5 @@
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { FormService } from 'src/app/shared/services/form.service';
 import { AutocompleteForm } from '../autocomplete-form/autocomplete-form';
 import { BooleanForm } from '../boolean-form/boolean-form';
 import { RadioGroupForm } from '../radio-group-form/radio-group-form';
@@ -11,25 +12,17 @@ export class ObjectForm<
       | FormControl<string | null>
       | FormControl<boolean | null>
       | FormControl<number | null>
-      | FormControl<string | number | null>;
+      | FormControl<string | number | null>
+      | FormGroup<T>;
   },
-  FormsTypes extends {
-    [Properties in keyof FormsTypes]:
-      | TextForm<ControlsType>
-      | BooleanForm<ControlsType>
-      | SelectGroupForm<ControlsType>
-      | AutocompleteForm<ControlsType>
-      | RadioGroupForm<ControlsType>;
-  }
+  T extends {
+    [Properties in keyof T]: FormControl<string | null>;
+  },
+  FormType extends TextForm<keyof ControlsType> = TextForm<keyof ControlsType>
 > {
-  constructor(
-    objectFormKey: keyof FormsTypes,
-    dynamicForms: Array<FormsTypes>
-  ) {
-    this.objectFormKey = objectFormKey;
+  constructor(dynamicForms: FormType[]) {
     this.dynamicForms = dynamicForms;
   }
 
-  objectFormKey: keyof FormsTypes;
-  dynamicForms: Array<FormsTypes> = [];
+  dynamicForms: FormType[];
 }
