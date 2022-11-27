@@ -20,20 +20,20 @@ export type UserRegistrationForms = ToFormControl<
   address: FormGroup<UserAddressFormControls>;
 };
 
-let teste: UserRegistrationForms = {
-  userName: new FormControl<string>('', { nonNullable: true }),
-  emailAddress: new FormControl<string>('', { nonNullable: true }),
-  password: new FormControl<string>('', { nonNullable: true }),
-  mobilePhone: new FormControl<string>('', { nonNullable: true }),
-  authorizedUseOfData: new FormControl<boolean>(false, { nonNullable: true }),
-  pokemonGroupName: new FormControl<string>('', { nonNullable: true }),
-  favoriteSeason: new FormControl<string>('', { nonNullable: true }),
-  stateName: new FormControl<string>('', { nonNullable: true }),
-  address: new FormGroup({
-    street: new FormControl<string>('', { nonNullable: true }),
-    district: new FormControl<string>('', { nonNullable: true }),
-    state: new FormControl<string>('', { nonNullable: true }),
-  }),
-};
+// let teste: UserRegistrationForms = {
+//   userName: new FormControl<string>('', { nonNullable: true }),
+//   emailAddress: new FormControl<string>('', { nonNullable: true }),
+//   password: new FormControl<string>('', { nonNullable: true }),
+//   mobilePhone: new FormControl<string>('', { nonNullable: true }),
+//   authorizedUseOfData: new FormControl<boolean>(false, { nonNullable: true }),
+//   pokemonGroupName: new FormControl<string>('', { nonNullable: true }),
+//   favoriteSeason: new FormControl<string>('', { nonNullable: true }),
+//   stateName: new FormControl<string>('', { nonNullable: true }),
+//   address: new FormGroup({
+//     street: new FormControl<string>('', { nonNullable: true }),
+//     district: new FormControl<string>('', { nonNullable: true }),
+//     state: new FormControl<string>('', { nonNullable: true }),
+//   }),
+// };
 
-console.log(teste);
+// console.log(teste);

@@ -35,7 +35,7 @@ export class User implements IUser {
     this.favoriteSeason = favoriteSeason;
     this.address = address;
 
-    //this.dynamicForms = this.generateDynamicForms();
+    this.objectForm = this.generateDynamicForms();
   }
 
   userName: string;
@@ -48,10 +48,10 @@ export class User implements IUser {
   favoriteSeason: string;
   address: IAddress;
 
-  dynamicForms!: ObjectForm<UserRegistrationForms, UserAddressFormControls>;
+  objectForm!: ObjectForm<UserRegistrationForms>;
 
-  private generateDynamicForms() {
-    return [
+  private generateDynamicForms(): ObjectForm<UserRegistrationForms> {
+    return new ObjectForm([
       new TextForm('userName', '', {
         validators: [Validators.required],
         baseClass: 'teste',
@@ -149,6 +149,6 @@ export class User implements IUser {
       //     order: 3,
       //   }),
       // ]),
-    ];
+    ]);
   }
 }

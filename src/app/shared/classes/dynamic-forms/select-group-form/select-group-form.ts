@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { IBaseFormOptions } from 'src/app/shared/interfaces/base-form/i-base-form-options';
 import { IGroupOptions } from 'src/app/shared/interfaces/base-form/i-group-options';
 import { BaseForm } from '../base-form/base-form';
@@ -9,7 +9,14 @@ export class SelectGroupForm<
       | FormControl<string | null>
       | FormControl<boolean | null>
       | FormControl<number | null>
-      | FormControl<string | number | null>;
+      | FormControl<string | number | null>
+      | FormGroup<{
+          [key: string]:
+            | FormControl<string | null>
+            | FormControl<boolean | null>
+            | FormControl<number | null>
+            | FormControl<string | number | null>;
+        }>;
   }
 > extends BaseForm<string | number | null, ControlsType> {
   constructor(

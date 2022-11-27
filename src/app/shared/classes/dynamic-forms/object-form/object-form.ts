@@ -13,12 +13,25 @@ export class ObjectForm<
       | FormControl<boolean | null>
       | FormControl<number | null>
       | FormControl<string | number | null>
-      | FormGroup<T>;
+      | FormGroup<{
+          [key: string]:
+            | FormControl<string | null>
+            | FormControl<boolean | null>
+            | FormControl<number | null>
+            | FormControl<string | number | null>;
+        }>;
   },
-  T extends {
-    [Properties in keyof T]: FormControl<string | null>;
-  },
-  FormType extends TextForm<keyof ControlsType> = TextForm<keyof ControlsType>
+  FormType extends
+    | TextForm<ControlsType>
+    | BooleanForm<ControlsType>
+    | SelectGroupForm<ControlsType>
+    | AutocompleteForm<ControlsType>
+    | RadioGroupForm<ControlsType> =
+    | TextForm<ControlsType>
+    | BooleanForm<ControlsType>
+    | SelectGroupForm<ControlsType>
+    | AutocompleteForm<ControlsType>
+    | RadioGroupForm<ControlsType>
 > {
   constructor(dynamicForms: FormType[]) {
     this.dynamicForms = dynamicForms;
