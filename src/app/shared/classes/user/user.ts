@@ -1,4 +1,4 @@
-import { Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IAddress } from '../../interfaces/address/i-address';
 import { IUser } from '../../interfaces/user/i-user';
 import { UserAddressFormControls } from '../../types/user-forms/user-address-form.controls';
@@ -48,10 +48,40 @@ export class User implements IUser {
   favoriteSeason: string;
   address: IAddress;
 
-  objectForm!: ObjectForm<UserRegistrationForms>;
+  objectForm: ObjectForm<UserRegistrationForms>;
 
-  private generateDynamicForms(): ObjectForm<UserRegistrationForms> {
-    return new ObjectForm([
+  private generateDynamicForms() {
+    const testFormObj = new ObjectForm<
+      UserAddressFormControls,
+      Pick<UserRegistrationForms, 'address'>
+    >(
+      [
+        new TextForm('street', '', {
+          validators: [Validators.required],
+          label: 'Street',
+          error: 'Street required',
+          required: true,
+          order: 1,
+        }),
+        new TextForm('district', '', {
+          validators: [Validators.required],
+          label: 'District',
+          error: 'District required',
+          required: true,
+          order: 2,
+        }),
+        new TextForm('state', '', {
+          validators: [Validators.required],
+          label: 'State',
+          error: 'State required',
+          required: true,
+          order: 3,
+        }),
+      ],
+      'address'
+    );
+    const first = testFormObj.dynamicForms[0];
+    const formObj = new ObjectForm<UserRegistrationForms>([
       new TextForm('userName', '', {
         validators: [Validators.required],
         baseClass: 'teste',
@@ -126,29 +156,7 @@ export class User implements IUser {
           order: 8,
         }
       ),
-      // new ObjectForm<UserAddressFormControls>([
-      //   new TextForm('street', '', {
-      //     validators: [Validators.required],
-      //     label: 'Street',
-      //     error: 'Street is required',
-      //     required: true,
-      //     order: 1,
-      //   }),
-      //   new TextForm('state', '', {
-      //     validators: [Validators.required],
-      //     label: 'State',
-      //     error: 'State is required',
-      //     required: true,
-      //     order: 2,
-      //   }),
-      //   new TextForm('district', '', {
-      //     validators: [Validators.required],
-      //     label: 'District',
-      //     error: 'District is required',
-      //     required: true,
-      //     order: 3,
-      //   }),
-      // ]),
     ]);
+    return formObj;
   }
 }

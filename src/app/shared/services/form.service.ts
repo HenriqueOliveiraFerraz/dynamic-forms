@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { AutocompleteForm } from '../classes/dynamic-forms/autocomplete-form/autocomplete-form';
 import { BooleanForm } from '../classes/dynamic-forms/boolean-form/boolean-form';
-import { NumberForm } from '../classes/dynamic-forms/number-form/number-form';
-import { ObjectForm } from '../classes/dynamic-forms/object-form/object-form';
 import { RadioGroupForm } from '../classes/dynamic-forms/radio-group-form/radio-group-form';
 import { SelectGroupForm } from '../classes/dynamic-forms/select-group-form/select-group-form';
 import { TextForm } from '../classes/dynamic-forms/text-form/text-form';
+import { FormControlsTypes } from '../types/forms/form.controls';
 
 @Injectable({
   providedIn: 'root',
@@ -14,25 +13,72 @@ import { TextForm } from '../classes/dynamic-forms/text-form/text-form';
 export class FormService {
   toFormGroup<
     ControlsType extends {
-      [Properties in keyof ControlsType]:
-        | FormControl<string | null>
-        | FormControl<boolean | null>
-        | FormControl<number | null>
-        | FormControl<string | number | null>;
+      [Properties in keyof ControlsType]: FormControlsTypes | FormGroup<any>;
     },
     FormType extends
-      | TextForm<ControlsType>
-      | BooleanForm<ControlsType>
-      | SelectGroupForm<ControlsType>
-      | AutocompleteForm<ControlsType>
-      | RadioGroupForm<ControlsType>
+      | TextForm<
+          Extract<
+            ControlsType,
+            { [P in keyof ControlsType]: FormControlsTypes }
+          >
+        >
+      | BooleanForm<
+          Extract<
+            ControlsType,
+            { [P in keyof ControlsType]: FormControlsTypes }
+          >
+        >
+      | SelectGroupForm<
+          Extract<
+            ControlsType,
+            { [P in keyof ControlsType]: FormControlsTypes }
+          >
+        >
+      | AutocompleteForm<
+          Extract<
+            ControlsType,
+            { [P in keyof ControlsType]: FormControlsTypes }
+          >
+        >
+      | RadioGroupForm<
+          Extract<
+            ControlsType,
+            { [P in keyof ControlsType]: FormControlsTypes }
+          >
+        > =
+      | TextForm<
+          Extract<
+            ControlsType,
+            { [P in keyof ControlsType]: FormControlsTypes }
+          >
+        >
+      | BooleanForm<
+          Extract<
+            ControlsType,
+            { [P in keyof ControlsType]: FormControlsTypes }
+          >
+        >
+      | SelectGroupForm<
+          Extract<
+            ControlsType,
+            { [P in keyof ControlsType]: FormControlsTypes }
+          >
+        >
+      | AutocompleteForm<
+          Extract<
+            ControlsType,
+            { [P in keyof ControlsType]: FormControlsTypes }
+          >
+        >
+      | RadioGroupForm<
+          Extract<
+            ControlsType,
+            { [P in keyof ControlsType]: FormControlsTypes }
+          >
+        >
   >(inputs: FormType[]) {
     let controls: {
-      [key: string]:
-        | FormControl<string | null>
-        | FormControl<boolean | null>
-        | FormControl<number | null>
-        | FormControl<string | number | null>;
+      [key: string]: FormControlsTypes;
     } = inputs.reduce((accumulator, value) => {
       return {
         ...accumulator,

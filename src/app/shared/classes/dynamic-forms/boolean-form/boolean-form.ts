@@ -1,21 +1,11 @@
 import { FormControl, FormGroup } from '@angular/forms';
 import { IBaseFormOptions } from 'src/app/shared/interfaces/base-form/i-base-form-options';
+import { FormControlsTypes } from 'src/app/shared/types/forms/form.controls';
 import { BaseForm } from '../base-form/base-form';
 
 export class BooleanForm<
   ControlsType extends {
-    [Properties in keyof ControlsType]:
-      | FormControl<string | null>
-      | FormControl<boolean | null>
-      | FormControl<number | null>
-      | FormControl<string | number | null>
-      | FormGroup<{
-          [key: string]:
-            | FormControl<string | null>
-            | FormControl<boolean | null>
-            | FormControl<number | null>
-            | FormControl<string | number | null>;
-        }>;
+    [Properties in keyof ControlsType]: FormControlsTypes;
   }
 > extends BaseForm<boolean | null, ControlsType> {
   constructor(

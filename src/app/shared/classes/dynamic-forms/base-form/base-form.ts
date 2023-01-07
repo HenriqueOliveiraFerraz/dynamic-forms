@@ -1,28 +1,13 @@
-import {
-  ValidatorFn,
-  AsyncValidatorFn,
-  FormControl,
-  FormGroup,
-} from '@angular/forms';
+import { ValidatorFn, AsyncValidatorFn } from '@angular/forms';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
+import { FormControlsTypes } from 'src/app/shared/types/forms/form.controls';
 import { IBaseForm } from '../../../interfaces/base-form/i-base-form';
 import { IBaseFormOptions } from '../../../interfaces/base-form/i-base-form-options';
 
 export class BaseForm<
   ValueType extends string | number | boolean | null,
   ControlsType extends {
-    [Properties in keyof ControlsType]:
-      | FormControl<string | null>
-      | FormControl<boolean | null>
-      | FormControl<number | null>
-      | FormControl<string | number | null>
-      | FormGroup<{
-          [key: string]:
-            | FormControl<string | null>
-            | FormControl<boolean | null>
-            | FormControl<number | null>
-            | FormControl<string | number | null>;
-        }>;
+    [Properties in keyof ControlsType]: FormControlsTypes;
   }
 > implements IBaseForm<ValueType, ControlsType>, IBaseFormOptions
 {

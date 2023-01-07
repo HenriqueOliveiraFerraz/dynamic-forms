@@ -1,8 +1,8 @@
 export interface IAddress {
-  street: string;
-  district: string;
+  street: string | null;
+  district: string | null;
   houseNumber: number;
   zipCode: string;
-  state: string;
+  state: string | null;
   country: string;
 }
