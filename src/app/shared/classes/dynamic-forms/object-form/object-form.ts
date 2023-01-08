@@ -1,4 +1,5 @@
 import { FormGroup } from '@angular/forms';
+import { ExtractObjFormControlsTypes } from 'src/app/shared/types/extract/extract.formcontrols.types';
 import { FormControlsTypes } from 'src/app/shared/types/forms/form.controls';
 import { AutocompleteForm } from '../autocomplete-form/autocomplete-form';
 import { BooleanForm } from '../boolean-form/boolean-form';
@@ -10,48 +11,30 @@ export class ObjectForm<
   ControlsType extends {
     [Properties in keyof ControlsType]: FormControlsTypes | FormGroup<any>;
   },
-  NestedFormGroup extends {
-    [Properties in keyof NestedFormGroup]: FormGroup<ControlsType>;
-  } = void,
   FormType extends
-    | TextForm<
-        Extract<ControlsType, { [P in keyof ControlsType]: FormControlsTypes }>
-      >
-    | BooleanForm<
-        Extract<ControlsType, { [P in keyof ControlsType]: FormControlsTypes }>
-      >
-    | SelectGroupForm<
-        Extract<ControlsType, { [P in keyof ControlsType]: FormControlsTypes }>
-      >
-    | AutocompleteForm<
-        Extract<ControlsType, { [P in keyof ControlsType]: FormControlsTypes }>
-      >
-    | RadioGroupForm<
-        Extract<ControlsType, { [P in keyof ControlsType]: FormControlsTypes }>
-      > =
-    | TextForm<
-        Extract<ControlsType, { [P in keyof ControlsType]: FormControlsTypes }>
-      >
-    | BooleanForm<
-        Extract<ControlsType, { [P in keyof ControlsType]: FormControlsTypes }>
-      >
-    | SelectGroupForm<
-        Extract<ControlsType, { [P in keyof ControlsType]: FormControlsTypes }>
-      >
-    | AutocompleteForm<
-        Extract<ControlsType, { [P in keyof ControlsType]: FormControlsTypes }>
-      >
-    | RadioGroupForm<
-        Extract<ControlsType, { [P in keyof ControlsType]: FormControlsTypes }>
-      >
+    | TextForm<ExtractObjFormControlsTypes<ControlsType>>
+    | BooleanForm<ExtractObjFormControlsTypes<ControlsType>>
+    | SelectGroupForm<ExtractObjFormControlsTypes<ControlsType>>
+    | AutocompleteForm<ExtractObjFormControlsTypes<ControlsType>>
+    | RadioGroupForm<ExtractObjFormControlsTypes<ControlsType>> =
+    | TextForm<ExtractObjFormControlsTypes<ControlsType>>
+    | BooleanForm<ExtractObjFormControlsTypes<ControlsType>>
+    | SelectGroupForm<ExtractObjFormControlsTypes<ControlsType>>
+    | AutocompleteForm<ExtractObjFormControlsTypes<ControlsType>>
+    | RadioGroupForm<ExtractObjFormControlsTypes<ControlsType>>
 > {
-  constructor(dynamicForms: FormType[], key?: keyof NestedFormGroup) {
+  constructor(
+    dynamicForms: FormType[],
+    key?: keyof Extract<
+      ControlsType,
+      { [P in keyof ControlsType]: FormGroup<any> }
+    >
+  ) {
     this.dynamicForms = dynamicForms;
     if (key) {
       console.log(key);
     }
   }
 
-  nestedFormKey: string = '';
   dynamicForms: FormType[];
 }

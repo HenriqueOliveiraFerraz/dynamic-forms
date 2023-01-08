@@ -5,6 +5,7 @@ import { BooleanForm } from '../classes/dynamic-forms/boolean-form/boolean-form'
 import { RadioGroupForm } from '../classes/dynamic-forms/radio-group-form/radio-group-form';
 import { SelectGroupForm } from '../classes/dynamic-forms/select-group-form/select-group-form';
 import { TextForm } from '../classes/dynamic-forms/text-form/text-form';
+import { ExtractObjFormControlsTypes } from '../types/extract/extract.formcontrols.types';
 import { FormControlsTypes } from '../types/forms/form.controls';
 
 @Injectable({
@@ -16,66 +17,16 @@ export class FormService {
       [Properties in keyof ControlsType]: FormControlsTypes | FormGroup<any>;
     },
     FormType extends
-      | TextForm<
-          Extract<
-            ControlsType,
-            { [P in keyof ControlsType]: FormControlsTypes }
-          >
-        >
-      | BooleanForm<
-          Extract<
-            ControlsType,
-            { [P in keyof ControlsType]: FormControlsTypes }
-          >
-        >
-      | SelectGroupForm<
-          Extract<
-            ControlsType,
-            { [P in keyof ControlsType]: FormControlsTypes }
-          >
-        >
-      | AutocompleteForm<
-          Extract<
-            ControlsType,
-            { [P in keyof ControlsType]: FormControlsTypes }
-          >
-        >
-      | RadioGroupForm<
-          Extract<
-            ControlsType,
-            { [P in keyof ControlsType]: FormControlsTypes }
-          >
-        > =
-      | TextForm<
-          Extract<
-            ControlsType,
-            { [P in keyof ControlsType]: FormControlsTypes }
-          >
-        >
-      | BooleanForm<
-          Extract<
-            ControlsType,
-            { [P in keyof ControlsType]: FormControlsTypes }
-          >
-        >
-      | SelectGroupForm<
-          Extract<
-            ControlsType,
-            { [P in keyof ControlsType]: FormControlsTypes }
-          >
-        >
-      | AutocompleteForm<
-          Extract<
-            ControlsType,
-            { [P in keyof ControlsType]: FormControlsTypes }
-          >
-        >
-      | RadioGroupForm<
-          Extract<
-            ControlsType,
-            { [P in keyof ControlsType]: FormControlsTypes }
-          >
-        >
+      | TextForm<ExtractObjFormControlsTypes<ControlsType>>
+      | BooleanForm<ExtractObjFormControlsTypes<ControlsType>>
+      | SelectGroupForm<ExtractObjFormControlsTypes<ControlsType>>
+      | AutocompleteForm<ExtractObjFormControlsTypes<ControlsType>>
+      | RadioGroupForm<ExtractObjFormControlsTypes<ControlsType>> =
+      | TextForm<ExtractObjFormControlsTypes<ControlsType>>
+      | BooleanForm<ExtractObjFormControlsTypes<ControlsType>>
+      | SelectGroupForm<ExtractObjFormControlsTypes<ControlsType>>
+      | AutocompleteForm<ExtractObjFormControlsTypes<ControlsType>>
+      | RadioGroupForm<ExtractObjFormControlsTypes<ControlsType>>
   >(inputs: FormType[]) {
     let controls: {
       [key: string]: FormControlsTypes;
