@@ -5,7 +5,7 @@ import { SelectGroupForm } from '../../classes/dynamic-forms/select-group-form/s
 import { TextForm } from '../../classes/dynamic-forms/text-form/text-form';
 import { FormControlsTypes } from './form.controls';
 
-export type GenericFormsType<
+export type GenericFormsTypes<
   T extends { [Properties in keyof T]: FormControlsTypes }
 > =
   | TextForm<T>

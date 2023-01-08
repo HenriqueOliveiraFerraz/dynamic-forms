@@ -1,8 +1,8 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IAddress } from '../../interfaces/address/i-address';
 import { IUser } from '../../interfaces/user/i-user';
-import { UserAddressFormControls } from '../../types/user-forms/user-address-form.controls';
-import { UserRegistrationForms } from '../../types/user-forms/user-registration-forms';
+import { UserAddressFormsControls } from '../../types/user-forms/user-address-form.controls';
+import { UserRegistrationFormsControls } from '../../types/user-forms/user-registration-forms';
 import { AutocompleteForm } from '../dynamic-forms/autocomplete-form/autocomplete-form';
 import { BooleanForm } from '../dynamic-forms/boolean-form/boolean-form';
 import { ObjectForm } from '../dynamic-forms/object-form/object-form';
@@ -48,12 +48,12 @@ export class User implements IUser {
   favoriteSeason: string;
   address: IAddress;
 
-  objectForm: ObjectForm<UserRegistrationForms>;
+  objectForm: ObjectForm<UserRegistrationFormsControls>;
 
   private generateDynamicForms() {
     const addressForm = new ObjectForm<
-      UserAddressFormControls,
-      Pick<UserRegistrationForms, 'address'>
+      UserAddressFormsControls,
+      Pick<UserRegistrationFormsControls, 'address'>
     >(
       [
         new TextForm('street', '', {
@@ -80,7 +80,7 @@ export class User implements IUser {
       ],
       'address'
     );
-    const formObj = new ObjectForm<UserRegistrationForms>([
+    const rootObject = new ObjectForm<UserRegistrationFormsControls>([
       new TextForm('userName', '', {
         validators: [Validators.required],
         baseClass: 'teste',
@@ -155,8 +155,7 @@ export class User implements IUser {
           order: 8,
         }
       ),
-      ...addressForm.dynamicForms,
     ]);
-    return formObj;
+    return rootObject;
   }
 }

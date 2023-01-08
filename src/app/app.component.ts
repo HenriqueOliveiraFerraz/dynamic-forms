@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { User } from './shared/classes/user/user';
 import { FormService } from './shared/services/form.service';
-import { UserRegistrationForms } from './shared/types/user-forms/user-registration-forms';
+import { UserRegistrationFormsControls } from './shared/types/user-forms/user-registration-forms';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,7 @@ import { UserRegistrationForms } from './shared/types/user-forms/user-registrati
 })
 export class AppComponent implements OnInit {
   user!: User;
-  userFormGroup!: FormGroup<UserRegistrationForms>;
+  userFormGroup!: FormGroup<UserRegistrationFormsControls>;
 
   @ViewChild('dynamicFormComponentTop')
   dynamicFormComponentTop!: TemplateRef<any>;

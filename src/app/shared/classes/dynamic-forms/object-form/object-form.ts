@@ -1,7 +1,8 @@
 import { FormGroup } from '@angular/forms';
+import { FormService } from 'src/app/shared/services/form.service';
 import { ExtractObjFormControlsTypes } from 'src/app/shared/types/extract/extract.formcontrols.types';
 import { FormControlsTypes } from 'src/app/shared/types/forms/form.controls';
-import { GenericFormsType } from 'src/app/shared/types/forms/generic.forms.types';
+import { GenericFormsTypes } from 'src/app/shared/types/forms/generic.forms.types';
 
 export class ObjectForm<
   FormControlsType extends {
@@ -16,16 +17,22 @@ export class ObjectForm<
   } = {
     [key: string]: FormGroup<FormControlsType>;
   },
-  FormType extends GenericFormsType<
+  FormType extends GenericFormsTypes<
     ExtractObjFormControlsTypes<FormControlsType>
-  > = GenericFormsType<ExtractObjFormControlsTypes<FormControlsType>>
+  > = GenericFormsTypes<ExtractObjFormControlsTypes<FormControlsType>>
 > {
-  constructor(dynamicForms: FormType[], key?: keyof FormGroupType) {
+  constructor(dynamicForms: FormType[], formGroupKey?: keyof FormGroupType) {
     this.dynamicForms = dynamicForms;
-    if (key) {
-      console.log(key);
+    if (formGroupKey) {
+      this.formGroupHolder = {};
+      this.formGroupHolder[formGroupKey as string] = FormService.toFormGroup(
+        this.dynamicForms
+      );
     }
   }
 
   dynamicForms: FormType[];
+  formGroupHolder?: {
+    [key: string]: FormGroup<FormControlsType>;
+  };
 }

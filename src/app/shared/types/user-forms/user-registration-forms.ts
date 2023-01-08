@@ -1,9 +1,9 @@
 import { FormGroup } from '@angular/forms';
 import { User } from '../../classes/user/user';
 import { ToFormControl } from '../mutables/to-form-control';
-import { UserAddressFormControls } from './user-address-form.controls';
+import { UserAddressFormsControls } from './user-address-form.controls';
 
-export type UserRegistrationForms = ToFormControl<
+export type UserRegistrationFormsControls = ToFormControl<
   Pick<
     User,
     | 'userName'
@@ -16,10 +16,10 @@ export type UserRegistrationForms = ToFormControl<
     | 'stateName'
   >
 > & {
-  address: FormGroup<UserAddressFormControls>;
+  address: FormGroup<UserAddressFormsControls>;
 };
 
-// let teste: UserRegistrationForms = {
+// let teste: UserRegistrationFormsControls = {
 //   userName: new FormControl<string>('', { nonNullable: true }),
 //   emailAddress: new FormControl<string>('', { nonNullable: true }),
 //   password: new FormControl<string>('', { nonNullable: true }),
