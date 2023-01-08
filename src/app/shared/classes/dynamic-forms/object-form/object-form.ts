@@ -7,9 +7,19 @@ import { RadioGroupForm } from '../radio-group-form/radio-group-form';
 import { SelectGroupForm } from '../select-group-form/select-group-form';
 import { TextForm } from '../text-form/text-form';
 
+type NestedKeyOf<ObjectType extends object> = {
+  [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object
+    ? `${Key}` | `${Key}.${NestedKeyOf<ObjectType[Key]>}`
+    : `${Key}`;
+}[keyof ObjectType & (string | number)];
+
 export class ObjectForm<
   ControlsType extends {
-    [Properties in keyof ControlsType]: FormControlsTypes | FormGroup<any>;
+    [Properties in keyof ControlsType]:
+      | FormControlsTypes
+      | FormGroup<{
+          [key: string]: FormControlsTypes;
+        }>;
   },
   FormType extends
     | TextForm<ExtractObjFormControlsTypes<ControlsType>>
