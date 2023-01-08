@@ -7,7 +7,7 @@ import { IBaseFormOptions } from '../../../interfaces/base-form/i-base-form-opti
 export class BaseForm<
   ValueType extends string | number | boolean | null,
   ControlsType extends {
-    [Properties in keyof ControlsType]: FormControlsTypes | FormGroup<any>;
+    [Properties in keyof ControlsType]: FormControlsTypes;
   }
 > implements IBaseForm<ValueType, ControlsType>, IBaseFormOptions
 {

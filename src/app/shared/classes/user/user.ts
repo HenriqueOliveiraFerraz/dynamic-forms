@@ -152,6 +152,7 @@ export class User implements IUser {
           order: 8,
         }
       ),
+      ...addressForm.dynamicForms,
     ]);
     return formObj;
   }

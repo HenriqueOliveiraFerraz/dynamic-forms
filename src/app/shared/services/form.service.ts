@@ -7,6 +7,7 @@ import { SelectGroupForm } from '../classes/dynamic-forms/select-group-form/sele
 import { TextForm } from '../classes/dynamic-forms/text-form/text-form';
 import { ExtractObjFormControlsTypes } from '../types/extract/extract.formcontrols.types';
 import { FormControlsTypes } from '../types/forms/form.controls';
+import { GenericFormsType } from '../types/forms/generic.forms.types';
 
 @Injectable({
   providedIn: 'root',
@@ -16,17 +17,9 @@ export class FormService {
     ControlsType extends {
       [Properties in keyof ControlsType]: FormControlsTypes | FormGroup<any>;
     },
-    FormType extends
-      | TextForm<ExtractObjFormControlsTypes<ControlsType>>
-      | BooleanForm<ExtractObjFormControlsTypes<ControlsType>>
-      | SelectGroupForm<ExtractObjFormControlsTypes<ControlsType>>
-      | AutocompleteForm<ExtractObjFormControlsTypes<ControlsType>>
-      | RadioGroupForm<ExtractObjFormControlsTypes<ControlsType>> =
-      | TextForm<ExtractObjFormControlsTypes<ControlsType>>
-      | BooleanForm<ExtractObjFormControlsTypes<ControlsType>>
-      | SelectGroupForm<ExtractObjFormControlsTypes<ControlsType>>
-      | AutocompleteForm<ExtractObjFormControlsTypes<ControlsType>>
-      | RadioGroupForm<ExtractObjFormControlsTypes<ControlsType>>
+    FormType extends GenericFormsType<
+      ExtractObjFormControlsTypes<ControlsType>
+    > = GenericFormsType<ExtractObjFormControlsTypes<ControlsType>>
   >(inputs: FormType[]) {
     let controls: {
       [key: string]: FormControlsTypes;

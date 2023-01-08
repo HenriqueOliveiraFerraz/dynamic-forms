@@ -5,7 +5,7 @@ import { BaseForm } from '../base-form/base-form';
 
 export class TextForm<
   ControlsType extends {
-    [Properties in keyof ControlsType]: FormControlsTypes | FormGroup<any>;
+    [Properties in keyof ControlsType]: FormControlsTypes;
   }
 > extends BaseForm<string | null, ControlsType> {
   constructor(
