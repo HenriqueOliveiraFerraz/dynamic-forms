@@ -51,7 +51,10 @@ export class User implements IUser {
   objectForm: ObjectForm<UserRegistrationForms>;
 
   private generateDynamicForms() {
-    const addressForm = new ObjectForm<Pick<UserRegistrationForms, 'address'>>(
+    const addressForm = new ObjectForm<
+      UserAddressFormControls,
+      Pick<UserRegistrationForms, 'address'>
+    >(
       [
         new TextForm('street', '', {
           validators: [Validators.required],

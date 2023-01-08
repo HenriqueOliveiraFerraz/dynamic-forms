@@ -1,25 +1,7 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  QueryList,
-  TemplateRef,
-  ViewChild,
-  ViewChildren,
-} from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { AutocompleteForm } from './shared/classes/dynamic-forms/autocomplete-form/autocomplete-form';
-import { BooleanForm } from './shared/classes/dynamic-forms/boolean-form/boolean-form';
-import { ObjectForm } from './shared/classes/dynamic-forms/object-form/object-form';
-import { RadioGroupForm } from './shared/classes/dynamic-forms/radio-group-form/radio-group-form';
-import { SelectGroupForm } from './shared/classes/dynamic-forms/select-group-form/select-group-form';
-import { TextForm } from './shared/classes/dynamic-forms/text-form/text-form';
 import { User } from './shared/classes/user/user';
-import { DynamicFormComponent } from './shared/components/dynamic-form/dynamic-form.component';
-import { IAddress } from './shared/interfaces/address/i-address';
 import { FormService } from './shared/services/form.service';
-import { UserAddressFormControls } from './shared/types/user-forms/user-address-form.controls';
 import { UserRegistrationForms } from './shared/types/user-forms/user-registration-forms';
 
 @Component({
