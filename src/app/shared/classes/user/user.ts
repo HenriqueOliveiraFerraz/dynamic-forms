@@ -1,4 +1,4 @@
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Validators } from '@angular/forms';
 import { IAddress } from '../../interfaces/address/i-address';
 import { IUser } from '../../interfaces/user/i-user';
 import { UserAddressFormsControls } from '../../types/user-forms/user-address-form.controls';
@@ -155,7 +155,7 @@ export class User implements IUser {
         ),
       ],
       {
-        address: addressForm.formGroupHolder!.address,
+        address: addressForm.dynamicForms,
       }
     );
     return rootObject;

@@ -4,21 +4,21 @@ import { FormControlsTypes } from 'src/app/shared/types/forms/form.controls';
 import { GenericFormsTypes } from 'src/app/shared/types/forms/generic.forms.types';
 
 export class ObjectForm<
-  FormControlsType extends {
-    [Properties in keyof FormControlsType]:
+  ControlsType extends {
+    [Properties in keyof ControlsType]:
       | FormControlsTypes
       | FormGroup<{
           [key: string]: FormControlsTypes;
         }>;
   },
   FormGroupType extends {
-    [key: string]: FormGroup<FormControlsType>;
+    [key: string]: FormGroup<ControlsType>;
   } = {
-    [key: string]: FormGroup<FormControlsType>;
+    [key: string]: FormGroup<ControlsType>;
   },
   FormType extends GenericFormsTypes<
-    ExtractObjFormControlsTypes<FormControlsType>
-  > = GenericFormsTypes<ExtractObjFormControlsTypes<FormControlsType>>
+    ExtractObjFormControlsTypes<ControlsType>
+  > = GenericFormsTypes<ExtractObjFormControlsTypes<ControlsType>>
 > {
   constructor(
     dynamicForms: FormType[],

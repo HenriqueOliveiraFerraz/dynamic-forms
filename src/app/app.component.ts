@@ -29,8 +29,6 @@ export class AppComponent implements OnInit {
       state: 'PR',
       country: 'BRA',
     });
-    this.userFormGroup = this.formService.toFormGroup(
-      this.user.objectForm.dynamicForms
-    );
+    this.userFormGroup = this.formService.toFormGroup(this.user.objectForm);
   }
 }
