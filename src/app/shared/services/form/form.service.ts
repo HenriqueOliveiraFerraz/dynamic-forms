@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ObjectForm } from '../classes/dynamic-forms/object-form/object-form';
-import { ExtractObjFormControlsTypes } from '../types/extract/extract.formcontrols.types';
-import { FormControlsTypes } from '../types/forms/form.controls';
-import { GenericFormsTypes } from '../types/forms/generic.forms.types';
+import { ObjectForm } from '../../classes/dynamic-forms/object-form/object-form';
+import { ExtractObjFormControlsTypes } from '../../types/extract/extract.formcontrols.types';
+import { FormControlsTypes } from '../../types/forms/form.controls';
+import { GenericFormsTypes } from '../../types/forms/generic.forms.types';
 
 @Injectable({
   providedIn: 'root',
@@ -27,31 +27,7 @@ export class FormService {
       };
     }, {});
 
-    const formGroup = new FormGroup(controls as ControlsType);
-    let groups: {
-      [key: string]: FormGroup<ControlsType>;
-    };
-
-    if (objectForm.formGroupHolder) {
-      Object.keys(objectForm.formGroupHolder).forEach((formKey) => {
-        const forms = objectForm.formGroupHolder![formKey];
-        let groupControls: {
-          [key: string]: FormControlsTypes;
-        } = forms.reduce((accumulator, value) => {
-          return {
-            ...accumulator,
-            [value.key]: value.formControl,
-          };
-        }, {});
-        groups = {
-          [formKey]: new FormGroup(groupControls as ControlsType),
-        };
-      });
-    }
-
-    return new FormGroup({
-      ...formGroup.controls,
-    });
+    return new FormGroup(controls);
   }
 
   getObjectKeys(obj: any, previousPath: string = ''): void {

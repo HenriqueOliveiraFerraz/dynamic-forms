@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { User } from './shared/classes/user/user';
-import { FormService } from './shared/services/form.service';
+import { FormService } from './shared/services/form/form.service';
 import { UserRegistrationFormsControls } from './shared/types/user-forms/user-registration-forms';
 
 @Component({
@@ -29,6 +29,5 @@ export class AppComponent implements OnInit {
       state: 'PR',
       country: 'BRA',
     });
-    this.userFormGroup = this.formService.toFormGroup(this.user.objectForm);
   }
 }

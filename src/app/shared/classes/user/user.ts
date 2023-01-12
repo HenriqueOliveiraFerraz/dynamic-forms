@@ -1,6 +1,7 @@
 import { Validators } from '@angular/forms';
 import { IAddress } from '../../interfaces/address/i-address';
 import { IUser } from '../../interfaces/user/i-user';
+import { DynamicFormService } from '../../services/dynamic-form/dynamic-form.service';
 import { UserAddressFormsControls } from '../../types/user-forms/user-address-form.controls';
 import { UserRegistrationFormsControls } from '../../types/user-forms/user-registration-forms';
 import { AutocompleteForm } from '../dynamic-forms/autocomplete-form/autocomplete-form';
@@ -13,7 +14,7 @@ import { PokemonGroup } from '../pokemon/pokemon-group';
 import { Season } from '../season/season';
 import { State } from '../state/state';
 
-export class User implements IUser {
+export class User extends DynamicFormService<IUser> implements IUser {
   constructor(
     userName: string,
     emailAddress: string,
@@ -25,6 +26,14 @@ export class User implements IUser {
     favoriteSeason: string,
     address: IAddress
   ) {
+    super({
+      userName,
+      emailAddress,
+      password,
+      mobilePhone,
+      authorizedUseOfData,
+      address,
+    });
     this.userName = userName;
     this.emailAddress = emailAddress;
     this.password = password;
@@ -34,8 +43,7 @@ export class User implements IUser {
     this.stateName = stateName;
     this.favoriteSeason = favoriteSeason;
     this.address = address;
-
-    this.objectForm = this.generateDynamicForms();
+    //this.objectForm = this.generateDynamicForms();
   }
 
   userName: string;
@@ -47,8 +55,6 @@ export class User implements IUser {
   stateName: string;
   favoriteSeason: string;
   address: IAddress;
-
-  objectForm: ObjectForm<UserRegistrationFormsControls>;
 
   private generateDynamicForms() {
     const addressForm = new ObjectForm<
