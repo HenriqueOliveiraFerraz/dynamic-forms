@@ -32,6 +32,6 @@ export class AppComponent implements OnInit {
       country: 'BRA',
     });
     const teste = this.dynamicForm.toFormGroup(this.user);
-    console.log(teste.value.address?.country);
+    console.log(teste.value);
   }
 }

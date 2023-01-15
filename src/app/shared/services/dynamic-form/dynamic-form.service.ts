@@ -12,10 +12,10 @@ export class DynamicFormService {
     }
   >(obj: Type) {
     type FormControls = {
-      [FormControlsChildren in keyof Type]:
-        | FormControlsTypes<Type[FormControlsChildren]>
-        | FormGroup<{
-            [key: string]: FormControlsTypes<Type[FormControlsChildren]>;
+      [FormControlsKeys in keyof Type]: Type extends object
+        ? FormControlsTypes<Type[FormControlsKeys]>
+        : FormGroup<{
+            [key: string]: FormControlsTypes;
           }>;
     };
     return new FormGroup(this.createFormControls<Type, FormControls>(obj));
@@ -26,10 +26,10 @@ export class DynamicFormService {
       [TypeChildren in keyof Type]: Type[TypeChildren];
     },
     FormControls extends {
-      [FormControlsChildren in keyof Type]:
-        | FormControlsTypes<Type[FormControlsChildren]>
-        | FormGroup<{
-            [key: string]: FormControlsTypes<Type[FormControlsChildren]>;
+      [FormControlsKeys in keyof Type]: Type extends object
+        ? FormControlsTypes<Type[FormControlsKeys]>
+        : FormGroup<{
+            [key: string]: FormControlsTypes;
           }>;
     }
   >(obj: Type) {
@@ -54,14 +54,11 @@ export class DynamicFormService {
           [keyof]: new FormGroup(nestedControls),
         };
       } else {
-        let control = {
-          [keyof as keyof FormControls]: new FormControl<typeof value>(value, {
-            nonNullable: true,
-          }),
-        };
         return {
           ...accumulator,
-          control,
+          [keyof]: new FormControl<typeof value>(value, {
+            nonNullable: true,
+          }),
         };
       }
     }, {} as FormControls);

@@ -1,8 +1,6 @@
 import { FormControl } from '@angular/forms';
 
-export type FormControlsTypes<
-  T extends string | number | boolean | null | void = void
-> = T extends void | null
+export type FormControlsTypes<T = void> = T extends void | null | undefined
   ?
       | FormControl<string>
       | FormControl<boolean>
