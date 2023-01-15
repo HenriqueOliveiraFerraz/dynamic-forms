@@ -1,31 +1,70 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { FormControlsTypes } from '../../types/forms/form.controls';
 
 @Injectable({
   providedIn: 'root',
 })
-export class DynamicFormService<
-  T extends {
-    [K in keyof T]: any;
-  }
-> {
-  constructor(@Inject('T') private readonly obj: T) {
-    this.createDynamicForm(this.obj);
-  }
-
-  createDynamicForm<
+export class DynamicFormService {
+  toFormGroup<
     Type extends {
-      [K in keyof Type]: any;
+      [TypeChildren in keyof Type]: Type[TypeChildren];
     }
   >(obj: Type) {
-    Object.keys(obj).forEach((key: string) => {
-      const prop = obj[key as keyof Type];
+    type FormControls = {
+      [FormControlsChildren in keyof Type]:
+        | FormControlsTypes<Type[FormControlsChildren]>
+        | FormGroup<{
+            [key: string]: FormControlsTypes<Type[FormControlsChildren]>;
+          }>;
+    };
+    return new FormGroup(this.createFormControls<Type, FormControls>(obj));
+  }
 
-      if (typeof prop === 'object') {
-        this.createDynamicForm(prop);
-        console.log(prop);
+  private createFormControls<
+    Type extends {
+      [TypeChildren in keyof Type]: Type[TypeChildren];
+    },
+    FormControls extends {
+      [FormControlsChildren in keyof Type]:
+        | FormControlsTypes<Type[FormControlsChildren]>
+        | FormGroup<{
+            [key: string]: FormControlsTypes<Type[FormControlsChildren]>;
+          }>;
+    }
+  >(obj: Type) {
+    const keys = Object.keys(obj);
+    let controls: FormControls | {} = keys.reduce((accumulator, key) => {
+      const keyof = key as keyof FormControls;
+      const value = obj[keyof];
+      if (typeof value === 'object') {
+        type CurrentObj = typeof value;
+        // type FormObj = {
+        //   [FormObjChildren in keyof FormControls]:
+        //     | FormControlsTypes<FormControls[FormObjChildren]>
+        //     | FormGroup<{
+        //         [key: string]: FormControlsTypes<CurrentObj[FormObjChildren]>;
+        //       }>;
+        // };
+        let nestedControls = this.createFormControls(
+          value
+        ) as unknown as FormControls;
+        return {
+          ...accumulator,
+          [keyof]: new FormGroup(nestedControls),
+        };
       } else {
-        console.log(key, prop, typeof prop);
+        let control = {
+          [keyof as keyof FormControls]: new FormControl<typeof value>(value, {
+            nonNullable: true,
+          }),
+        };
+        return {
+          ...accumulator,
+          control,
+        };
       }
-    });
+    }, {} as FormControls);
+    return controls as FormControls;
   }
 }

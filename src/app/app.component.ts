@@ -1,6 +1,8 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { User } from './shared/classes/user/user';
+import { IUser } from './shared/interfaces/user/i-user';
+import { DynamicFormService } from './shared/services/dynamic-form/dynamic-form.service';
 import { FormService } from './shared/services/form/form.service';
 import { UserRegistrationFormsControls } from './shared/types/user-forms/user-registration-forms';
 
@@ -18,7 +20,7 @@ export class AppComponent implements OnInit {
   @ViewChild('dynamicFormComponentBottom')
   dynamicFormComponentBottom!: TemplateRef<any>;
 
-  constructor(private formService: FormService) {}
+  constructor(private dynamicForm: DynamicFormService) {}
 
   ngOnInit(): void {
     this.user = new User('', '', '', '', false, '', '', '', {
@@ -29,5 +31,7 @@ export class AppComponent implements OnInit {
       state: 'PR',
       country: 'BRA',
     });
+    const teste = this.dynamicForm.toFormGroup(this.user);
+    console.log(teste.value.address?.country);
   }
 }
