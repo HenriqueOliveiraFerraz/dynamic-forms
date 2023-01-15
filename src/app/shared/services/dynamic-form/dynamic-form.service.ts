@@ -34,7 +34,7 @@ export class DynamicFormService {
     }
   >(obj: Type) {
     const keys = Object.keys(obj);
-    let controls: FormControls | {} = keys.reduce((accumulator, key) => {
+    let controls: FormControls = keys.reduce((accumulator, key) => {
       const keyof = key as keyof FormControls;
       const value = obj[keyof];
       if (typeof value === 'object') {
@@ -65,6 +65,6 @@ export class DynamicFormService {
         };
       }
     }, {} as FormControls);
-    return controls as FormControls;
+    return controls;
   }
 }
